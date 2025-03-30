@@ -1,0 +1,29 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+:root{
+    --fonte-principal: 'Inter';
+    --branco: #FFFFFF;
+    --preto: #000000;
+}
+body{
+    font-family: var(--fonte-principal);
+    font-size: 20px;
+    font-weight: 500;
+}
+.cabecalho{
+    background-image: url("../figma/assets/fundoHeader.png");
+    background-repeat: no-repeat;
+}
+.banner{
+    color:var(--branco);
+}
+.header__links-link{
+    text-decoration: none;
+    color: var(--branco);
+}
+.banner__conteudo__titulo{
+    font-size: 30px;
+}
+.banner__conteudo__descricao{
+    font-style: italic;
+}

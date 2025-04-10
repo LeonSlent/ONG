@@ -1,10 +1,46 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Adote BLM</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-
+    <header class="cabecalho">
+        <section class="links">
+                <a href="#" class="header-link">ADOTE BLM</a>
+            <div>
+                <a href="#" class="header-link">LOGIN</a>
+                <a href="#" class="header-link">CADASTRO</a>
+            </div>
+        </section>
+        <div class="banner-conteudo">
+            <h1 class="banner-conteudo-titulo">SEJA BEM VINDO!</h1>
+        </div>
+    </header>
+    <form class="form-login">
+        <input class="input-login" name="nome" id="input-nome" type="text" placeholder="Login"/>
+        <input class="input-login" name="senha" id="input-senha" type="password" placeholder="Senha"/>
+        <h2 class="redireciona-cadastro">Não tem uma conta? Faça seu cadastro <a href="#" class="link-cadastro">aqui</a></h2>
+        <button class="botao-login">ENTRAR</button>
+        <button class="button-login" id="button-login" type="button">Sign in with Google</button>
+      </form>
+    <footer class="rodape">
+        <ul class="rodape-links">
+            <li class="rodape-links-btn">
+                <a href="https://www.facebook.com/login/?next=https%3A%2F%2Fwww.facebook.com%2F%3Flocale%3Dpt_BR" class="link">
+                <img src="assets/facebook.png" alt="Faceboook" class="link-logo"></a>
+            </li>
+            <li class="rodape-links-btn">
+                <a href="https://www.instagram.com/" class="link">
+                    <img src="assets/instragram.png" alt="Instagram" class="link-logo"></a>
+            </li>
+            <li class="rodape-links-btn">
+                <a href="https://www.linkedin.com/feed/" class="link">
+                    <img src="assets/linkedin.png" alt="LinkedIn" class="link-logo"></a>
+            </li>
+        </ul>
+    </footer>
 </body>
 </html>

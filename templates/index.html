@@ -3,68 +3,79 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Adote BLM</title>
+    <title>Home - Adote BLM</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <header class="cabecalho">
-        <link rel="stylesheet" href="css/style.css">
-        <img class="headerr" src="../templates/img/fundoHeader.png" alt="*****">
-        <section class="banner">
-                <a href="#" class="header__links-link">ADOTE BLM</a>
-            <div class="header__links">
-                <a href="#" class="header__links-link">LOGIN</a>
-                <a href="#" class="header__links-link">CADASTRO</a>
-            </div>
-            <div class="banner__conteudo">
-                <h1 class="banner__conteudo__titulo">UMA CAMPANHA ESPECIAL</h1>
-                <p class="banner__conteudo__descricao">Uma seleção especial de peludinhos que buscam um lar para chamar de seu</p>
+        <section class="links">
+                <a href="#" class="header-link">ADOTE BLM</a>
+            <div>
+                <a href="#" class="header-link">LOGIN</a>
+                <a href="#" class="header-link">CADASTRO</a>
             </div>
         </section>
+        <div class="banner-conteudo">
+            <h1 class="banner-conteudo-titulo">UMA CAMPANHA ESPECIAL</h1>
+            <p class="banner-conteudo-descricao">Uma seleção especial de peludinhos que buscam um lar para chamar de seu</p>
+        </div>
     </header>
-        <section class="filtros">
-            <button class="filtros-btn">TODOS</button>
-            <button class="filtros-btn">CÃES</button>
-            <button class="filtros-btn">GATOS</button>
-        </section>
+    <nav class="wrap">
+        <ul class="nav">
+            <li><button class="filtros-btn todos" href="#" id="filtro-todos" value="todos">TODOS</button></li>
+            <li><button class="filtros-btn caes" href="#" id="filtro-caes" valiue="caes">CÃES</button></li>
+            <li><button class="filtros-btn gatos" href="#" id="filto-gatos" value="gatos">GATOS</button></li>
+        </ul>
+    </nav>
         <section class="pets">
             <ul class="pets-lista">
                 <li class="pet-card gato">
-                    <img src="../templates/img/gatoExterminador.png" alt="Gato Exterminador">
+                    <img src="assets/gatoExterminador.png" alt="Gato Exterminador">
                     <h3>EXTERMINADOR</h3>
                     <button class="adotar-btn">QUERO ADOTAR</button>
                 </li>
                 <li class="pet-card cao">
-                    <img src="../templates/img/caoAriri.png" alt="Cão Ariri">
+                    <img src="assets/caoAriri.png" alt="Cão Ariri">
                     <h3>ARIRI</h3>
                     <button class="adotar-btn">QUERO ADOTAR</button>
                 </li>
                 <li class="pet-card cao">
-                    <img src="../templates/img/caoCalabresa.png" alt="Cão Calabresa">
+                    <img src="assets/caoCalabresa.png" alt="Cão Calabresa">
                     <h3>CALABRESA</h3>
                     <button class="adotar-btn">QUERO ADOTAR</button>
                 </li>
                 <li class="pet-card cao">
-                    <img src="../templates/img/caoRaimundo.png" alt="Cão Raimundo">
+                    <img src="assets/caoRaimundo.png" alt="Cão Raimundo">
                     <h3>RAIMUNDO</h3>
                     <button class="adotar-btn">QUERO ADOTAR</button>
                 </li>
                 <li class="pet-card gato">
-                    <img src="../templates/img/gatoPeçanha.png" alt="Gato Peçanha">
+                    <img src="assets/gatoPeçanha.png" alt="Gato Peçanha">
                     <h3>PEÇANHA</h3>
                     <button class="adotar-btn">QUERO ADOTAR</button>
                 </li>
                 <li class="pet-card gato">
-                    <img src="../templates/img/gatoMajinBoo.png" alt="Gato Majin Boo">
+                    <img src="assets/gatoMajinBoo.png" alt="Gato Majin Boo">
                     <h3>MAJIN BOO</h3>
                     <button class="adotar-btn">QUERO ADOTAR</button>
                 </li>
             </ul>
         </section>
     <footer class="rodape">
-        <a href="https://www.facebook.com/login/?next=https%3A%2F%2Fwww.facebook.com%2F%3Flocale%3Dpt_BR" class="link"><img src="../templates/img/facebook.png" alt="Faceboook" class="link-logo"></a>
-        <a href="https://www.instagram.com/" class="link"><img src="../templates/img/instragram.png" alt="Instagram" class="link-logo"></a>
-        <a href="https://www.linkedin.com/feed/" class="link"><img src="../templates/img/linkedin.png" alt="LinkedIn" class="link-logo"></a>
+        <ul class="rodape-links">
+            <li class="rodape-links-btn">
+                <a href="https://www.facebook.com/login/?next=https%3A%2F%2Fwww.facebook.com%2F%3Flocale%3Dpt_BR" class="link">
+                <img src="assets/facebook.png" alt="Faceboook" class="link-logo"></a>
+            </li>
+            <li class="rodape-links-btn">
+                <a href="https://www.instagram.com/" class="link">
+                    <img src="assets/instragram.png" alt="Instagram" class="link-logo"></a>
+            </li>
+            <li class="rodape-links-btn">
+                <a href="https://www.linkedin.com/feed/" class="link">
+                    <img src="assets/linkedin.png" alt="LinkedIn" class="link-logo"></a>
+            </li>
+        </ul>
     </footer>
 </body>
 </html>

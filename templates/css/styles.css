@@ -4,6 +4,8 @@
     --fonte-principal: 'Inter';
     --branco: #FFFFFF;
     --preto: #000000;
+    --cinza: #D9D9D9;
+    --fundo-botao: #333;
 }
 * {
     font-family: var(--fonte-principal);
@@ -34,7 +36,7 @@
     margin-left: 20px;
   }
 .banner-conteudo {
-    background-image: url("templates/img/banner.png");
+    background-image: url("assets/fundoHeader.png");
     background-size: cover;
     background-position: center;
     height: 300px;
@@ -65,7 +67,7 @@
     margin: 3em auto 2em auto;
     list-style: none;
 }
-.filtros-btn {
+.btn {
     background-color: var(--branco);
     border: none;
     height: 44px;
@@ -76,7 +78,7 @@
     font-size: 1rem;
     font-weight: 600;
   }
-  .filtros-btn:focus, .filtros-btn:active{
+.btn:focus, .btn:active{
     background-color: var(--preto);
     border-radius: 90px;
     cursor: pointer;
@@ -88,7 +90,7 @@
     font-size: 1rem;
     font-weight: 600;
   }
-  .pets-lista {
+.pets-lista {
     list-style: none;
     display: flex;
     flex-wrap: wrap;
@@ -97,33 +99,29 @@
     justify-content: center;
     margin: auto;
   }
-  
-  .pet-card {
-    background-color: #f5f5f5;
+.pet-card {
+    background-color: var(--branco);
     border-radius: 16px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     overflow: hidden;
     text-align: center;
     max-width: 220px;
     font-family: var(--fonte-principal);
-  }
-  
-  .pet-card img {
+  } 
+.pet-card img {
     width: 100%;
     height: auto;
     display: block;
   }
-  
-  .pet-card h3 {
+.pet-card h3 {
     margin: 12px 0 8px;
     font-size: 18px;
     color: var(--preto);
   }
-  
-  .adotar-btn {
+.adotar-btn {
     margin: 10px auto 16px;
     padding: 10px 20px;
-    background-color: #000;
+    background-color: var(--preto);
     color: var(--branco);
     border: none;
     border-radius: 999px;
@@ -132,16 +130,15 @@
     cursor: pointer;
     transition: background-color 0.3s ease;
   }
-  
-  .adotar-btn:hover {
-    background-color: #333;
+.adotar-btn:hover {
+    background-color: var(--fundo-botao);
   }
-  .rodape{
+.rodape{
     background-color: var(--preto);
     padding: 40px 0;
     text-align: center;
   }
-  .rodape-links {
+.rodape-links {
     list-style: none;
     display: flex;
     justify-content: center;
@@ -149,29 +146,81 @@
     padding: 0;
     margin: 0;
   }
-  .rodape-links-btn {
+.rodape-links-btn {
     border: 2px solid var(--branco);
     padding: 16px 32px;
     border-radius: 4px;
     transition: all 0.3s ease;
   }
-  
-  .link {
+.link {
     display: flex;
     align-items: center;
     justify-content: center;
   }
-  
-  .link-logo {
+.link-logo {
     width: 24px;
     height: 24px;
     filter: brightness(0) invert(1);
   }
-  
-  .rodape-links-btn:hover {
+.rodape-links-btn:hover {
     background-color: var(--branco);
   }
   
-  .rodape-links-btn:hover .link-logo {
+.rodape-links-btn:hover .link-logo {
     filter: none;
+  }
+.titulo-login{
+  font-family: VAR(--fonte-principal);
+  font-weight: 800;
+  text-align: center;
+  font-size: 40px;
+  margin-top: 2em;
+}
+.form-login{
+  font-family: var(--fonte-principal);
+  font-size: 20px;
+  display: flex;
+  flex-direction: column;
+  width:40%;
+  align-items: center;
+  justify-content: space-between;
+  margin: 2em auto 5em auto;
+  }
+.campos-login{
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+  }
+  .input-login{
+    height: 50px;
+    border-radius: 20px;
+    border: transparent;
+    background-color: var(--cinza);
+  }
+  .input-login::placeholder {
+    font-size: 20px;
+    font-weight: 600;
+  }
+  .link-cadastro {
+    text-decoration: none;
+    font-weight: 900;
+    color: var(--preto);
+  }
+  .login-btns{
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    align-items: center;
+  }
+  .botao-login{
+    background-color: var(--preto);
+    border-radius: 90px;
+    cursor: pointer;
+    height: 44px;
+    text-decoration: none;
+    color: var(--branco);
+    padding: 10px 16px;
+    border-radius: 15px;
+    font-size: 1rem;
+    font-weight: 600;
   }

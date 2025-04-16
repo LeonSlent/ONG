@@ -1,226 +1,227 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
 
-:root{
-    --fonte-principal: 'Inter';
-    --branco: #FFFFFF;
-    --preto: #000000;
-    --cinza: #D9D9D9;
-    --fundo-botao: #333;
+:root {
+  --fonte-principal: "Inter";
+  --branco: #ffffff;
+  --preto: #000000;
+  --cinza: #d9d9d9;
+  --fundo-botao: #333;
 }
 * {
-    font-family: var(--fonte-principal);
-    font-size: 20px;
-    font-weight: 500;   
-    box-sizing: border-box;
-    font-family: var(--fonte-principal);
+  font-family: var(--fonte-principal);
+  font-size: 20px;
+  font-weight: 500;
+  box-sizing: border-box;
+  font-family: var(--fonte-principal);
 }
 .cabecalho {
-    position: relative;
-    color: var(--branco);
-  }
+  position: relative;
+  color: var(--branco);
+}
 .links {
-    display: flex;
-    justify-content: space-between;
-    padding: 20px 40px;
-    background-color: transparent;
-    position: absolute;
-    width: 100%;
-    top: 0;
-    left: 0;
-    z-index: 2;
-  }
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 40px;
+  background-color: transparent;
+  position: absolute;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 2;
+}
 .header-link {
-    color: var(--branco);
-    text-decoration: none;
-    font-weight: bold;
-    margin-left: 20px;
-  }
+  color: var(--branco);
+  text-decoration: none;
+  font-weight: bold;
+  margin-left: 20px;
+}
 .banner-conteudo {
-    background-image: url("assets/fundoHeader.png");
-    background-size: cover;
-    background-position: center;
-    height: 300px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding: 40px;
-    color: var(--branco);
-  }
+  background-image: url("../img/banner.png");
+  background-size: cover;
+  background-position: center;
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 40px;
+  color: var(--branco);
+}
 .banner-conteudo-titulo {
-    font-size: 36px;
-    font-weight: 800;
-    margin-bottom: 16px;
-  }
+  font-size: 36px;
+  font-weight: 800;
+  margin-bottom: 16px;
+}
 .banner-conteudo-descricao {
-    font-style: italic;
-    font-size: 20px;
-    max-width: 600px;
-  }
+  font-style: italic;
+  font-size: 20px;
+  max-width: 600px;
+}
 .nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 20px;
-    width:40%;
-    margin: 3em auto 2em auto;
-    list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 20px;
+  width: 40%;
+  margin: 3em auto 2em auto;
+  list-style: none;
 }
 .btn {
-    background-color: var(--branco);
-    border: none;
-    height: 44px;
-    text-decoration: none;
-    color: var(--preto);
-    padding: 10px 16px;
-    border-radius: 8px;
-    font-size: 1rem;
-    font-weight: 600;
-  }
-.btn:focus, .btn:active{
-    background-color: var(--preto);
-    border-radius: 90px;
-    cursor: pointer;
-    height: 44px;
-    text-decoration: none;
-    color: var(--branco);
-    padding: 10px 16px;
-    border-radius: 8px;
-    font-size: 1rem;
-    font-weight: 600;
-  }
+  background-color: var(--branco);
+  border: none;
+  height: 44px;
+  text-decoration: none;
+  color: var(--preto);
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+}
+.btn:focus,
+.btn:active {
+  background-color: var(--preto);
+  border-radius: 90px;
+  cursor: pointer;
+  height: 44px;
+  text-decoration: none;
+  color: var(--branco);
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+}
 .pets-lista {
-    list-style: none;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    padding: 2em 9em 3em 9em;
-    justify-content: center;
-    margin: auto;
-  }
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 2em 9em 3em 9em;
+  justify-content: center;
+  margin: auto;
+}
 .pet-card {
-    background-color: var(--branco);
-    border-radius: 16px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    overflow: hidden;
-    text-align: center;
-    max-width: 220px;
-    font-family: var(--fonte-principal);
-  } 
+  background-color: var(--branco);
+  border-radius: 16px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  text-align: center;
+  max-width: 220px;
+  font-family: var(--fonte-principal);
+}
 .pet-card img {
-    width: 100%;
-    height: auto;
-    display: block;
-  }
+  width: 100%;
+  height: auto;
+  display: block;
+}
 .pet-card h3 {
-    margin: 12px 0 8px;
-    font-size: 18px;
-    color: var(--preto);
-  }
+  margin: 12px 0 8px;
+  font-size: 18px;
+  color: var(--preto);
+}
 .adotar-btn {
-    margin: 10px auto 16px;
-    padding: 10px 20px;
-    background-color: var(--preto);
-    color: var(--branco);
-    border: none;
-    border-radius: 999px;
-    font-weight: 600;
-    font-size: 12px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
+  margin: 10px auto 16px;
+  padding: 10px 20px;
+  background-color: var(--preto);
+  color: var(--branco);
+  border: none;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 12px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
 .adotar-btn:hover {
-    background-color: var(--fundo-botao);
-  }
-.rodape{
-    background-color: var(--preto);
-    padding: 40px 0;
-    text-align: center;
-  }
+  background-color: var(--fundo-botao);
+}
+.rodape {
+  background-color: var(--preto);
+  padding: 40px 0;
+  text-align: center;
+}
 .rodape-links {
-    list-style: none;
-    display: flex;
-    justify-content: center;
-    gap: 40px;
-    padding: 0;
-    margin: 0;
-  }
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  padding: 0;
+  margin: 0;
+}
 .rodape-links-btn {
-    border: 2px solid var(--branco);
-    padding: 16px 32px;
-    border-radius: 4px;
-    transition: all 0.3s ease;
-  }
+  border: 2px solid var(--branco);
+  padding: 16px 32px;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
 .link {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 .link-logo {
-    width: 24px;
-    height: 24px;
-    filter: brightness(0) invert(1);
-  }
+  width: 24px;
+  height: 24px;
+  filter: brightness(0) invert(1);
+}
 .rodape-links-btn:hover {
-    background-color: var(--branco);
-  }
-  
+  background-color: var(--branco);
+}
+
 .rodape-links-btn:hover .link-logo {
-    filter: none;
-  }
-.titulo-login{
+  filter: none;
+}
+.titulo-login {
   font-family: VAR(--fonte-principal);
   font-weight: 800;
   text-align: center;
   font-size: 40px;
   margin-top: 2em;
 }
-.form-login{
+.form-login {
   font-family: var(--fonte-principal);
   font-size: 20px;
   display: flex;
   flex-direction: column;
-  width:40%;
+  width: 40%;
   align-items: center;
   justify-content: space-between;
   margin: 2em auto 5em auto;
-  }
-.campos-login{
-    display: flex;
-    flex-direction: column;
-    gap: 1em;
-  }
-  .input-login{
-    height: 50px;
-    border-radius: 20px;
-    border: transparent;
-    background-color: var(--cinza);
-  }
-  .input-login::placeholder {
-    font-size: 20px;
-    font-weight: 600;
-  }
-  .link-cadastro {
-    text-decoration: none;
-    font-weight: 900;
-    color: var(--preto);
-  }
-  .login-btns{
-    display: flex;
-    flex-direction: column;
-    gap: 1em;
-    align-items: center;
-  }
-  .botao-login{
-    background-color: var(--preto);
-    border-radius: 90px;
-    cursor: pointer;
-    height: 44px;
-    text-decoration: none;
-    color: var(--branco);
-    padding: 10px 16px;
-    border-radius: 15px;
-    font-size: 1rem;
-    font-weight: 600;
-  }
+}
+.campos-login {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+.input-login {
+  height: 50px;
+  border-radius: 20px;
+  border: transparent;
+  background-color: var(--cinza);
+}
+.input-login::placeholder {
+  font-size: 20px;
+  font-weight: 600;
+}
+.link-cadastro {
+  text-decoration: none;
+  font-weight: 900;
+  color: var(--preto);
+}
+.login-btns {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  align-items: center;
+}
+.botao-login {
+  background-color: var(--preto);
+  border-radius: 90px;
+  cursor: pointer;
+  height: 44px;
+  text-decoration: none;
+  color: var(--branco);
+  padding: 10px 16px;
+  border-radius: 15px;
+  font-size: 1rem;
+  font-weight: 600;
+}

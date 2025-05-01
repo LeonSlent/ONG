@@ -1,27 +1,23 @@
 import os
 from flask import Flask
-from controller.controller import Controller
-from model.database import db
-from model import cliente, funcionario, adotante, adocao, animal, pessoa
+from flask_login import LoginManager
+from controller.controller import controller_bp, user_loader_funcao
+from model.database import config_db
 
 # Instância o Flask
 app = Flask(__name__, template_folder=os.path.join('view', 'templates'))
 
-# Configura o Banco de Dados
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.secret_key = 'chave_secreta'
 
-# Inicia o Banco de Dados
-db.init_app(app)
+login_manager = LoginManager(app)
+login_manager.user_loader(user_loader_funcao)
+login_manager.login_view = 'controller_bp.logar'
 
-#Instância o Controller
-controller = Controller()
+# Chamada a função para configurar o Banco de Dados
+config_db(app)
 
-#Cria todas as tabelas no banco de Dados
-with app.app_context():
-    db.create_all()
-
-app.add_url_rule('/', 'home', controller.home)
+# Registra o Blueprint (rotas)
+app.register_blueprint(controller_bp)
 
 if __name__ == '__main__':
     app.run(debug=True)

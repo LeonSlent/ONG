@@ -1,8 +1,10 @@
+#rotas que vão renderizar os templates aqui
+
 import os
 from flask import Flask
 from flask_login import LoginManager
-from controller.controller import controller_bp, user_loader_funcao
-from model.database import config_db
+from controller import controller_bp, user_loader_funcao
+import model
 
 # Instância o Flask
 app = Flask(__name__, template_folder=os.path.join('view', 'templates'))

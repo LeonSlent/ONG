@@ -2,7 +2,6 @@ import sys, uuid, requests, os, json, datetime
 
 from sqlalchemy.dialects.mysql import TEXT
 from flask_sqlalchemy import SQLAlchemy
-from cryptograph import Cryptograph
 from flask_login import UserMixin
 from dotenv import load_dotenv
 from flask import jsonify
@@ -16,7 +15,6 @@ class Config:
     SECRET_KEY = os.getenv('SECRET_KEY')
     with open('/static/images/animal_holder.png', 'rb') as f:
         ANIMAL_HOLDER = f.read()
-    crypograph = Cryptograph()
     app = Flask(__name__)
     app.config['SQLALCHEMY_DATABASE_URI'] = SQLALCHEMY_DATABASE_URI
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False

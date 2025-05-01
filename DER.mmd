@@ -1,0 +1,55 @@
+---
+title: ONG DER
+---
+erDiagram
+User{
+    CPF Integer(11) PK "NOT NULL" 
+    Nome String(100) "NOT NULL"
+    Email String(100) "NOT NULL"
+    Pass TEXT "NOT NULL"
+}
+
+TelUser{
+    CPF Integer(11) FK "NOT NULL"
+    Tel Integer(11) PK "NOT NULL"
+    Ident String(36) "NULLABLE"
+}
+
+Admin{
+    Mat String(36) PK "DEFAULT(uuid4()), NOT NULL"
+    Nome String(100) "NOT NULL"
+    Email String(100) "NOT NULL"
+    CPF Integer(11) "NOT NULL"
+    Pass TEXT "NOT NULL"
+}
+
+Tel{
+    Mat Integer(36) FK "DEFAULT(uuid4()), NOT NULL"
+    Tel Integer(11) PK "NOT NULL"
+    Ident String(36) "NULLABLE"
+}
+
+Animal{
+    ID Integer(10) PK "DEFAULT(AUTOINCREMENT), NOT NULL"
+    Port String(30) "NOT NULL"
+    Race String(30) "NOT NULL"
+    Type String(30) "NOT NULL"
+    Cast Bool "DEFAULT(False) ,NOT NULL"
+    Pic BLOB "DEFAULT(IMAGE_PLACE), NOT NULL"
+}
+
+History{
+    ID String(36) PK "DEFAULT(uuid4()), NOT NULL"
+    Date DATETIME "DEFAULT(Datetime.now()), NOT NULL"
+    Status String(20) "DEFAULT(Idle), NOT NULL"
+    Animal Integer(10) FK "From(Animal.ID), NOT NULL"
+    Reciver Integer(11) FK "From(User.CPF), NOT NULL"
+    Aproval Integer(36) FK "From(Admin.Mat), NOT NULL"
+}
+
+User ||--o{ TelUser : "has"
+Admin ||--o{ Tel : "has"
+History ||--o{ Animal : "has"
+History ||--o{ User : "has"
+History ||--o{ Admin : "has"
+

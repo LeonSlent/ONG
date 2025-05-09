@@ -19,7 +19,7 @@ def user_loader_funcao(id):
 
 # Rota para registrar o Usuario
 @controller_bp.route('/register', methods=['GET', 'POST'])
-def registrar():
+def register():
     if request.method == 'POST':
         nome = request.form['nome']
         email = request.form['email']
@@ -37,7 +37,7 @@ def registrar():
 
 # Rota para logar o Usuario
 @controller_bp.route('/login', methods=['GET', 'POST'])
-def logar():
+def login():
     if request.method == 'POST':
         email = request.form['email']
         senha = request.form['senha']

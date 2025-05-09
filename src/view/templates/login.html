@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login - Adote BLM</title>
-    <link rel="stylesheet" href="../static/css/styles.css" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}" />
   </head>
   <body>
     <header class="cabecalho">
@@ -20,32 +20,23 @@
       </div>
     </header>
     <h2 class="titulo titulo-login">EFETUE SEU LOGIN</h2>
-    <form class="form-login">
+
+    <!-- Formulario do backend -->
+    <form class="form-login" method="POST">
+    
       <div class="campos-login">
-        <input
-          class="input-form input-login"
-          name="nome"
-          id="input-nome"
-          type="text"
-          placeholder="Login"
-        />
-        <input
-          class="input-form input-login"
-          name="senha"
-          id="input-senha"
-          type="password"
-          placeholder="Senha"
-        />
+        <input class="input-form input-login" type="email" name="email" id="" placeholder="Email" required> 
+
+        <input class="input-form input-login" type="password" name="senha" placeholder="Senha" id="" required> 
+
       </div>
 
       <div class="conta-btns">
-        <button class="btn botao-conta">ENTRAR</button>
-        <button class="botao-google">
-          <img src="../static/img/google-logo.png" class="botao-google-img" />
-          <span class="btn-content">Sign in with Google</span>
-        </button>
+        <button class="btn botao-conta" type="submit">Logar</button>
       </div>
-    </form>
+      </form>
+
+
     <h3 class="redireciona-conta">
       Não tem uma conta? Faça seu cadastro
       <a href="#" class="redireciona-conta-link">aqui</a>
@@ -58,7 +49,7 @@
             class="link"
           >
             <img
-              src="../static/img/facebook.png"
+              src="{{ url_for('static', filename='img/facebook.png') }}"
               alt="Faceboook"
               class="link-logo"
           /></a>
@@ -66,7 +57,7 @@
         <li class="rodape-links-btn">
           <a href="https://www.instagram.com/" class="link">
             <img
-              src="../static/img/instragram.png"
+              src="{{ url_for('static', filename='img/instragram.png') }}"
               alt="Instagram"
               class="link-logo"
           /></a>
@@ -74,7 +65,7 @@
         <li class="rodape-links-btn">
           <a href="https://www.linkedin.com/feed/" class="link">
             <img
-              src="../static/img/linkedin.png"
+              src="{{ url_for('static', filename='img/linkedin.png') }}"
               alt="LinkedIn"
               class="link-logo"
           /></a>

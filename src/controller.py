@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, request, redirect, url_for
 from flask_login import login_user, login_required
-from model.usuario import Usuario
-from model.database import db
+from model import User
+from model import db
 
 
 # Cria o Blueprint
@@ -12,20 +12,20 @@ controller_bp = Blueprint('controller_bp', __name__, template_folder='../view/te
 def home():
     return render_template('home.html')
 
-# Função normal para usar no user_loader do login_manager no app.py
+# Função para usar no user_loader do login_manager no app.py
 def user_loader_funcao(id):
-    usuario = db.session.query(Usuario).filter_by(id=id).first()
+    usuario = db.session.query(User).filter_by(id=id).first()
     return usuario
 
 # Rota para registrar o Usuario
-@controller_bp.route('/registrar', methods=['GET', 'POST'])
+@controller_bp.route('/register', methods=['GET', 'POST'])
 def registrar():
     if request.method == 'POST':
         nome = request.form['nome']
         email = request.form['email']
         senha = request.form['senha']
 
-        novo_usuario = Usuario(nome=nome, email=email, senha=senha)
+        novo_usuario = User(nome=nome, email=email, senha=senha)
         db.session.add(novo_usuario)
         db.session.commit()
 
@@ -33,23 +33,23 @@ def registrar():
 
         return redirect(url_for('controller_bp.home'))
 
-    return render_template('registrar.html')
+    return render_template('register.html')
 
 # Rota para logar o Usuario
-@controller_bp.route('/logar', methods=['GET', 'POST'])
+@controller_bp.route('/login', methods=['GET', 'POST'])
 def logar():
     if request.method == 'POST':
         email = request.form['email']
         senha = request.form['senha']
 
-        usuario = db.session.query(Usuario).filter_by(email=email, senha=senha).first()
+        usuario = db.session.query(User).filter_by(email=email, senha=senha).first()
         if not usuario:
-            return render_template('logar.html')
+            return render_template('login.html')
 
         login_user(usuario)
         return redirect(url_for('controller_bp.home'))
         
-    return render_template('logar.html')
+    return render_template('login.html')
         
 # Possivel Rota para adotar o Animal
 @controller_bp.route('/adotar')

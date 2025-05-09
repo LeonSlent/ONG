@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cadastro - Adote BLM</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}" />
+  </head>
+  <body>
+    <header class="cabecalho">
+      <section class="links">
+        <a href="#" class="header-link">ADOTE BLM</a>
+        <div>
+          <a href="#" class="header-link">LOGIN</a>
+          <a href="#" class="header-link">CADASTRO</a>
+        </div>
+      </section>
+      <div class="banner-conteudo">
+        <h1 class="banner-conteudo-titulo">SEJA BEM VINDO!</h1>
+      </div>
+    </header>
+    <h2 class="titulo titulo-cadastro">FAÇA SEU CADASTRO</h2>
+
+    <!-- Formulario do backend -->
+    <form method="POST", class="form-cadastro">
+
+      <div class="form-grupo">
+        <div class="form-labels">
+          <label for="nome">Nome:</label>  
+          <label for="email">Email:</label>  
+          <label for="senha">Senha:</label>  
+        </div>
+    
+        <div class="form-inputs">
+          <input class="input-form input-cadastro" type="text" name="nome" required>
+          <input class="input-form input-cadastro" type="email" name="email" required> 
+          <input class="input-form input-cadastro" type="password" name="senha" required>
+        </div>
+      </div>
+
+      <div class="conta-btns">
+        <button class="btn botao-conta" type="submit">Cadastrar</button>
+      </div>
+
+      </form>
+
+
+
+
+    <h2 class="redireciona-conta redireciona-login">
+      Já tem uma conta? Faça seu login
+      <a href="#" class="redireciona-conta-link">aqui</a>
+    </h2>
+    <footer class="rodape">
+      <ul class="rodape-links">
+        <li class="rodape-links-btn">
+          <a
+            href="https://www.facebook.com/login/?next=https%3A%2F%2Fwww.facebook.com%2F%3Flocale%3Dpt_BR"
+            class="link"
+          >
+            <img
+              src="{{ url_for('static', filename='img/facebook.png') }}"
+              alt="Faceboook"
+              class="link-logo"
+          /></a>
+        </li>
+        <li class="rodape-links-btn">
+          <a href="https://www.instagram.com/" class="link">
+            <img
+              src="{{ url_for('static', filename='img/instragram.png') }}"
+              alt="Instagram"
+              class="link-logo"
+          /></a>
+        </li>
+        <li class="rodape-links-btn">
+          <a href="https://www.linkedin.com/feed/" class="link">
+            <img
+              src="{{ url_for('static', filename='img/linkedin.png') }}"
+              alt="LinkedIn"
+              class="link-logo"
+          /></a>
+        </li>
+      </ul>
+    </footer>
+  </body>
+</html>

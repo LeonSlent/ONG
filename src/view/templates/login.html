@@ -9,10 +9,10 @@
   <body>
     <header class="cabecalho">
       <section class="links">
-        <a href="#" class="header-link">ADOTE BLM</a>
+        <a href="{{ url_for('controller_bp.home') }}" class="header-link">ADOTE BLM</a>
         <div>
-          <a href="#" class="header-link">LOGIN</a>
-          <a href="#" class="header-link">CADASTRO</a>
+          <a href="{{ url_for('controller_bp.login') }}" class="header-link">LOGIN</a>
+          <a href="{{ url_for('controller_bp.register') }}" class="header-link">CADASTRO</a>
         </div>
       </section>
       <div class="banner-conteudo">

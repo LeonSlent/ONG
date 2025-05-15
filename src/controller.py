@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, request, redirect, url_for
-from flask_login import login_user, login_required
+from flask_login import login_user, login_required, current_user, logout_user
 from model import User
 from model import db
 
@@ -52,9 +52,15 @@ def login():
     return render_template('login.html')
         
 # Possivel Rota para adotar o Animal
-@controller_bp.route('/adotar')
+@controller_bp.route('/logout')
 @login_required
-def adotar():
-    return 'me adota ai'
+def logout():
+    logout_user()
+    return redirect(url_for('controller_bp.home'))
+
+@controller_bp.route('/user')
+@login_required
+def user():
+    return render_template('user.html', nome=current_user.nome)
     
 

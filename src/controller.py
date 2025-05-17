@@ -12,7 +12,7 @@ controller_bp = Blueprint('controller_bp', __name__, template_folder='../view/te
 def home():
     return render_template('home.html')
 
-# Função para usar no user_loader do login_manager no app.py
+# Carrega o usuário a partir do ID salvo na sessão
 def user_loader_funcao(id):
     usuario = db.session.query(User).filter_by(id=id).first()
     return usuario
@@ -51,16 +51,21 @@ def login():
         
     return render_template('login.html')
         
-# Possivel Rota para adotar o Animal
+# Rota para logout do usuario
 @controller_bp.route('/logout')
 @login_required
 def logout():
     logout_user()
     return redirect(url_for('controller_bp.home'))
 
+# Rota para o perfil do usuario
 @controller_bp.route('/user')
 @login_required
 def user():
     return render_template('user.html', nome=current_user.nome)
-    
+
+@controller_bp.route('/register_animal')
+@login_required
+def register_animal():
+    return render_template('register_animal.html')
 

@@ -1,0 +1,44 @@
+<form method="POST" enctype="multipart/form-data">
+
+    <div>
+    
+        <label for="nome">Nome:</label>
+        <input type="text" name="nome" required>
+        
+        <br>
+
+        <label for="idade">Idade:</label>
+        <input type="number" name="idade" required min="0">
+
+        <br>
+        
+        <label for="genero">Gênero:</label> 
+        <select name="genero" id="genero" required> 
+            <option value="">Selecione</option>
+            <option value="masculino">Masculino</option>
+            <option value="feminimo">Feminino</option>
+        </select>
+
+        <br>
+
+        <label for="especie">Espécie:</label> 
+        <select name="especie" id="especie" required> 
+            <option value="">Selecione</option>
+            <option value="gato">Gato</option>
+            <option value="cao">Cão</option>
+        </select>
+
+        <br>
+
+        <label for="imagem">Imagem:</label> 
+        <input type="file" name="imagem" accept="image/*" required>
+
+    </div>
+
+    <br>
+
+    <div >
+        <button type="submit">Cadastrar Animal</button>
+    </div>
+
+</form>

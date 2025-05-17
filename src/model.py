@@ -20,18 +20,18 @@ def config_db(app):
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     nome = db.Column(db.String(100), nullable=False)
-    #cpf = db.Column(db.Integer(11))
     email = db.Column(db.String(100), unique=True, nullable=False)
     senha = db.Column(db.String())
 
+class Animal(UserMixin, db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    nome = db.Column(db.String(100), nullable=False)
+    idade = db.Column(db.Integer, nullable=False)
+    genero = db.Column(db.String(100), nullable=False)
+    especie = db.Column(db.String(100), nullable=False)
+    imagem = db.Column(db.String, nullable=False)
 
 '''
-class UserTell(UserMixin, db.Model):
-    Tell = db.Column(db.Integer(11), primary_Key=True)
-    UserCPF = db.Column(db.Integer,db.ForeignKey('Admin.Cpf'), primary_key=True, nullable=False)
-    Name = db.Column(db.String(50), nullable=False)
-
-
 
 class Admin(UserMixin, db.Model):
     Mat = db.Column(db.String(36), primary_key=True, default=str(uuid.uuid4()))
@@ -42,21 +42,6 @@ class Admin(UserMixin, db.Model):
     Role = db.Column(db.String(10), nullable=False, default='admin')
     Password = db.Column(db.TEXT, nullable=False)
 
-
-class AdminTell(UserMixin, db.Model):
-    AdminMat = db.Column(db.String(36), db.ForeignKey('Admin.Mat'), primary_key=True, nullable=False)
-    Tell = db.Column(db.Integer(11), prmary_key=True, nullable=False)
-    Name = db.Column(db.String(50), nullable=False)
-
-
-class Animal(UserMixin, db.Model):
-    Id = db.Column(db.Integer, primary_key=True)
-    Porte = db.Column(db.String(50), nullable=False)
-    Race = db.Column(db.String(50), nullable=False)
-    Name = db.Column(db.String(50), nullable=False)
-    Type = db.Column(db.String(50), nullable=False)
-    Cast = db.Column(db.Boolean, nullable=False, default=False)
-    Image = db.Column(db.Blob, nullable=False, default=ANIMAL_HOLDER)
 
 
 class Adoption(UserMixin, db.Model):

@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, request, redirect, url_for
 from flask_login import login_user, login_required, current_user, logout_user
-from model import User
-from model import db
+from model import User, Animal
+from model import db, registrar_usuario, registrar_animal, login_usuario
 
 
 # Cria o Blueprint
@@ -21,15 +21,8 @@ def user_loader_funcao(id):
 @controller_bp.route('/register', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
-        nome = request.form['nome']
-        email = request.form['email']
-        senha = request.form['senha']
-
-        novo_usuario = User(nome=nome, email=email, senha=senha)
-        db.session.add(novo_usuario)
-        db.session.commit()
-
-        login_user(novo_usuario)
+        # Chama a função do model para criar a instancia no banco de dados
+        registrar_usuario()
 
         return redirect(url_for('controller_bp.home'))
 
@@ -39,14 +32,10 @@ def register():
 @controller_bp.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        email = request.form['email']
-        senha = request.form['senha']
-
-        usuario = db.session.query(User).filter_by(email=email, senha=senha).first()
-        if not usuario:
+        # Chama a função do model para logar o usuario na sessão, se o login estiver incorreto, ele retorna para a rota de login novamente
+        if login_usuario() is False:
             return render_template('login.html')
-
-        login_user(usuario)
+        
         return redirect(url_for('controller_bp.home'))
         
     return render_template('login.html')
@@ -64,8 +53,15 @@ def logout():
 def user():
     return render_template('user.html', nome=current_user.nome)
 
-@controller_bp.route('/register_animal')
+# Rota para cadastrar o animal
+@controller_bp.route('/register_animal', methods=['GET', 'POST'])
 @login_required
 def register_animal():
+    if request.method == 'POST':
+        # Chama a função do model para criar a instancia no banco de dados
+        registrar_animal()
+        
+        return redirect(url_for('controller_bp.home'))
+
     return render_template('register_animal.html')
 

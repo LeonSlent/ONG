@@ -1,5 +1,6 @@
+from flask import request
 from flask_sqlalchemy import SQLAlchemy
-from flask_login import UserMixin
+from flask_login import UserMixin, login_user
 
 db = SQLAlchemy()
 
@@ -29,26 +30,37 @@ class Animal(UserMixin, db.Model):
     idade = db.Column(db.Integer, nullable=False)
     genero = db.Column(db.String(100), nullable=False)
     especie = db.Column(db.String(100), nullable=False)
-    imagem = db.Column(db.String, nullable=False)
-
-'''
-
-class Admin(UserMixin, db.Model):
-    Mat = db.Column(db.String(36), primary_key=True, default=str(uuid.uuid4()))
-    Name = db.Column(db.String(50), nullable=False)
-    Email = db.Column(db.String(50), nullable=False)
-    Password = db.Column(db.String(50), nullable=False)
-    Cpf = db.Column(db.Integer(11), nullable=False)
-    Role = db.Column(db.String(10), nullable=False, default='admin')
-    Password = db.Column(db.TEXT, nullable=False)
+    #imagem = db.Column(db.String, nullable=False)
 
 
+def registrar_usuario():
+    nome = request.form['nome']
+    email = request.form['email']
+    senha = request.form['senha']
 
-class Adoption(UserMixin, db.Model):
-    Id = db.Column(db.Integer, primary_key=True)
-    Data = db.Column(db.DateTime, nullable=False, default=datetime.datetime.now())
-    Status = db.Column(db.String(10), nullable=False, default='Idle')
-    AnimalId = db.Column(db.Integer,db.ForeignKey('Animal.Id'), nullable=False)
-    AdminMat = db.Column(db.Integer,db.ForeignKey('Admin.Mat'), nullable=False)
-    UserCpf = db.Column(db.Integer,db.ForeignKey('Admin.Cpf'), nullable=False)
-'''
+    novo_usuario = User(nome=nome, email=email, senha=senha)
+    db.session.add(novo_usuario)
+    db.session.commit()
+
+    login_user(novo_usuario)
+
+def registrar_animal():
+    nome = request.form['nome']
+    idade = request.form['idade']
+    genero = request.form['genero']
+    especie = request.form['especie']
+
+
+    novo_animal = Animal(nome=nome, idade=idade, genero=genero, especie=especie)
+    db.session.add(novo_animal)
+    db.session.commit()
+
+def login_usuario():
+    email = request.form['email']
+    senha = request.form['senha']
+
+    usuario = db.session.query(User).filter_by(email=email, senha=senha).first()
+    if not usuario:
+        return False
+
+    login_user(usuario)

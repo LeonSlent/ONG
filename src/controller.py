@@ -1,7 +1,6 @@
 from flask import Blueprint, render_template, request, redirect, url_for
-from flask_login import login_user, login_required, current_user, logout_user
-from model import User, Animal
-from model import db, registrar_usuario, registrar_animal, login_usuario
+from flask_login import login_required, current_user, logout_user
+from model import registrar_usuario, registrar_animal, login_usuario, listar_animais, animal_existente
 
 
 # Cria o Blueprint
@@ -10,19 +9,19 @@ controller_bp = Blueprint('controller_bp', __name__, template_folder='../view/te
 # Rota principal
 @controller_bp.route('/')
 def home():
-    return render_template('home.html')
-
-# Carrega o usuário a partir do ID salvo na sessão
-def user_loader_funcao(id):
-    usuario = db.session.query(User).filter_by(id=id).first()
-    return usuario
+    lista = listar_animais()
+    return render_template('home.html', animais=lista)
 
 # Rota para registrar o Usuario
 @controller_bp.route('/register', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
+        nome = request.form['nome']
+        email = request.form['email']
+        senha = request.form['senha']
         # Chama a função do model para criar a instancia no banco de dados
-        registrar_usuario()
+        if registrar_usuario(nome, email, senha) is False:
+            return render_template('register.html')
 
         return redirect(url_for('controller_bp.home'))
 
@@ -32,8 +31,10 @@ def register():
 @controller_bp.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
+        email = request.form['email']
+        senha = request.form['senha']
         # Chama a função do model para logar o usuario na sessão, se o login estiver incorreto, ele retorna para a rota de login novamente
-        if login_usuario() is False:
+        if login_usuario(email, senha) is False:
             return render_template('login.html')
         
         return redirect(url_for('controller_bp.home'))
@@ -58,10 +59,26 @@ def user():
 @login_required
 def register_animal():
     if request.method == 'POST':
+        nome = request.form['nome']
+        idade = request.form['idade']
+        genero = request.form['genero']
+        especie = request.form['especie']
         # Chama a função do model para criar a instancia no banco de dados
-        registrar_animal()
+        registrar_animal(nome, idade, genero, especie)
         
         return redirect(url_for('controller_bp.home'))
 
     return render_template('register_animal.html')
+
+# Rota do animal
+@controller_bp.route('/animal/<animal_id>')
+@login_required
+def animal_perfil(animal_id):
+    if animal_existente(animal_id) is False:
+        return render_template('home.html')
+    animal = animal_existente(animal_id)
+    
+    return render_template('animal.html', animal=animal)
+    
+
 

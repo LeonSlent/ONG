@@ -62,43 +62,31 @@
         </li>
       </ul>
     </nav>
+
+
+
     <section class="pets">
       <ul class="pets-lista">
-        <li class="pet-card gato">
-          <img
-            src="{{ url_for('static', filename='img/gatoExterminador.png') }}"
-            alt="Gato Exterminador"
-          />
-          <h3>EXTERMINADOR</h3>
-          <button class="adotar-btn">QUERO ADOTAR</button>
-        </li>
-        <li class="pet-card cao">
-          <img src="{{ url_for('static', filename='img/caoAriri.png') }}" alt="Cão Ariri" />
-          <h3>ARIRI</h3>
-          <button class="adotar-btn">QUERO ADOTAR</button>
-        </li>
-        <li class="pet-card cao">
-          <img src="{{ url_for('static', filename='img/caoCalabresa.png') }}" alt="Cão Calabresa" />
-          <h3>CALABRESA</h3>
-          <button class="adotar-btn">QUERO ADOTAR</button>
-        </li>
-        <li class="pet-card cao">
-          <img src="{{ url_for('static', filename='img/caoRaimundo.png') }}" alt="Cão Raimundo" />
-          <h3>RAIMUNDO</h3>
-          <button class="adotar-btn">QUERO ADOTAR</button>
-        </li>
-        <li class="pet-card gato">
-          <img src="{{ url_for('static', filename='img/gatoPeçanha.png') }}" alt="Gato Peçanha" />
-          <h3>PEÇANHA</h3>
-          <button class="adotar-btn">QUERO ADOTAR</button>
-        </li>
-        <li class="pet-card gato">
-          <img src="{{ url_for('static', filename='img/gatoMajinBoo.png') }}" alt="Gato Majin Boo" />
-          <h3>MAJIN BOO</h3>
-          <button class="adotar-btn">QUERO ADOTAR</button>
-        </li>
+
+        {% for animal in animais %}
+          <li class="pet-card gato">
+            <img
+              src="{{ url_for('static', filename='img/gatoExterminador.png') }}"
+              alt="{{ animal.nome }}"
+            />
+            <h3>{{ animal.nome }}</h3>
+            <button class="adotar-btn">
+              <a href="{{ url_for('controller_bp.animal_perfil', animal_id=animal.id) }}" class="adotar-btn">QUERO ADOTAR</a>
+            </button>
+          </li>
+        {% else %}
+          <li>Não temos nenhum animal cadastrado</li>
+        {% endfor %}
+
       </ul>
     </section>
+
+
     <footer class="rodape">
       <ul class="rodape-links">
         <li class="rodape-links-btn">

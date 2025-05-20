@@ -1,8 +1,6 @@
-import os
 from flask import Flask
-from flask_login import LoginManager
-from model import config_db
-from controller import controller_bp, user_loader_funcao
+from model import config_db, login_manager
+from controller import controller_bp
 
 
 # Instância o Flask
@@ -10,9 +8,10 @@ app = Flask(__name__, static_folder='view/static', template_folder='view/templat
 
 app.secret_key = 'secret_key'
 
+# Inicia o Login Manager com o app
+login_manager.init_app(app)
 
-login_manager = LoginManager(app)
-login_manager.user_loader(user_loader_funcao)
+#Função para enviar o usuario para a rota de login se ele não estiver logado
 login_manager.login_view = 'controller_bp.login'
 
 # Chamada a função para configurar o Banco de Dados

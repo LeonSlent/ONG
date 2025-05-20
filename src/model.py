@@ -1,7 +1,7 @@
-from flask import request
 from flask_sqlalchemy import SQLAlchemy
-from flask_login import UserMixin, login_user
+from flask_login import UserMixin, login_user, LoginManager
 
+# Banco de Dados
 db = SQLAlchemy()
 
 def config_db(app):
@@ -9,12 +9,20 @@ def config_db(app):
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-    # Inicia o Banco de Dados
+    # Inicia o Banco de Dados com o app
     db.init_app(app)
 
     #Cria todas as tabelas no banco de Dados
     with app.app_context():
         db.create_all()
+
+# Instância o Login Manager
+login_manager = LoginManager()
+
+# Função responsável por carregar o usuário a partir do ID salvo na sessão.
+@login_manager.user_loader
+def user_loader(id):
+    return db.session.query(User).filter_by(id=id).first()
 
 
 
@@ -30,13 +38,14 @@ class Animal(UserMixin, db.Model):
     idade = db.Column(db.Integer, nullable=False)
     genero = db.Column(db.String(100), nullable=False)
     especie = db.Column(db.String(100), nullable=False)
-    #imagem = db.Column(db.String, nullable=False)
 
+#class Adocao(UserMixin, db.Model):
+#class Admin(UserMixin, db.Model):
 
-def registrar_usuario():
-    nome = request.form['nome']
-    email = request.form['email']
-    senha = request.form['senha']
+def registrar_usuario(nome, email, senha):
+    # Verifica se o email ja existe no banco de dados
+    if db.session.query(User).filter_by(email=email).first():
+        return False
 
     novo_usuario = User(nome=nome, email=email, senha=senha)
     db.session.add(novo_usuario)
@@ -44,23 +53,24 @@ def registrar_usuario():
 
     login_user(novo_usuario)
 
-def registrar_animal():
-    nome = request.form['nome']
-    idade = request.form['idade']
-    genero = request.form['genero']
-    especie = request.form['especie']
-
-
+def registrar_animal(nome, idade, genero, especie):
     novo_animal = Animal(nome=nome, idade=idade, genero=genero, especie=especie)
     db.session.add(novo_animal)
     db.session.commit()
 
-def login_usuario():
-    email = request.form['email']
-    senha = request.form['senha']
-
+def login_usuario(email, senha):
     usuario = db.session.query(User).filter_by(email=email, senha=senha).first()
     if not usuario:
         return False
 
     login_user(usuario)
+
+def listar_animais():
+    return Animal.query.all()
+
+def animal_existente(animal_id):
+    animal = db.session.query(Animal).get(animal_id)
+    if not animal:
+        return False
+    else:
+        return animal

@@ -2,3 +2,7 @@
 <h3>Idade: {{ animal.idade }}</h3>
 <h3>Genero: {{ animal.genero }}</h3>
 <h3>Especie: {{ animal.especie }}</h3>
+
+<button class="adotar-btn">
+    <a href="{{ url_for('controller_bp.adotar', animal_id=animal.id) }}" class="adotar-btn">ADOTAR AGORA</a>
+</button>

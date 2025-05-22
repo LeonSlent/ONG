@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, request, redirect, url_for
 from flask_login import login_required, current_user, logout_user
-from model import registrar_usuario, registrar_animal, login_usuario, listar_animais, animal_existente
+from model import registrar_usuario, registrar_animal, login_usuario, listar_animais, animal_existente, processo_adocao
 
 
 # Cria o Blueprint
@@ -79,6 +79,13 @@ def animal_perfil(animal_id):
     animal = animal_existente(animal_id)
     
     return render_template('animal.html', animal=animal)
+
+@controller_bp.route('/adotar/<animal_id>')
+@login_required
+def adotar(animal_id):
+    processo_adocao(animal_id, current_user.id)
+
+    return redirect(url_for('controller_bp.user'))
     
 
 

@@ -1,6 +1,7 @@
 from flask import Blueprint, render_template, request, redirect, url_for
 from flask_login import login_required, current_user, logout_user
-from model import registrar_usuario, registrar_animal, login_usuario, listar_animais, animal_existente, processo_adocao
+from model import registrar_usuario, registrar_animal, login_usuario, listar_animais, animal_existente
+from datetime import datetime
 
 
 # Cria o Blueprint
@@ -19,8 +20,10 @@ def register():
         nome = request.form['nome']
         email = request.form['email']
         senha = request.form['senha']
-        data_nas = request.form['data_nas']
+        data_nas_str = request.form['data_nas']
         cpf = request.form['cpf']
+        # Converte string para datetime.date
+        data_nas = datetime.strptime(data_nas_str, '%Y-%m-%d').date()
         # Chama a função do model para criar a instancia no banco de dados
         if registrar_usuario(nome, email, senha, data_nas, cpf) is False:
             return render_template('register.html')
@@ -81,13 +84,13 @@ def animal_perfil(animal_id):
     animal = animal_existente(animal_id)
     
     return render_template('animal.html', animal=animal)
-
+'''
 @controller_bp.route('/adotar/<animal_id>')
 @login_required
 def adotar(animal_id):
     processo_adocao(animal_id, current_user.id)
 
     return redirect(url_for('controller_bp.user'))
-    
+'''   
 
 

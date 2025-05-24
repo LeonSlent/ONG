@@ -43,7 +43,7 @@ class Animal(db.Model):
 #class Adocao(UserMixin, db.Model):
 #class Admin(UserMixin, db.Model):
 
-def registrar_usuario(nome, email, senha):
+def registrar_usuario(nome, email, senha, data_nas, cpf):
     # Verifica se o email ja existe no banco de dados
     if db.session.query(User).filter_by(email=email).first():
         return False

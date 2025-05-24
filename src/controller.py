@@ -19,8 +19,10 @@ def register():
         nome = request.form['nome']
         email = request.form['email']
         senha = request.form['senha']
+        data_nas = request.form['data_nas']
+        cpf = request.form['cpf']
         # Chama a função do model para criar a instancia no banco de dados
-        if registrar_usuario(nome, email, senha) is False:
+        if registrar_usuario(nome, email, senha, data_nas, cpf) is False:
             return render_template('register.html')
 
         return redirect(url_for('controller_bp.home'))

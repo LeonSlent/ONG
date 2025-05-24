@@ -25,13 +25,13 @@ login_manager = LoginManager()
 def user_loader(id):
     return db.session.query(User).filter_by(id=id).first()
 
-
-
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     nome = db.Column(db.String(100), nullable=False)
     email = db.Column(db.String(100), unique=True, nullable=False)
-    senha = db.Column(db.String())
+    senha = db.Column(db.String(50))
+    data_nas = db.Column(db.String(15), nullable=False)
+    cpf = db.Column(db.String(14), nullable=False, unique=True)
 
 class Animal(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -40,15 +40,7 @@ class Animal(db.Model):
     genero = db.Column(db.String(100), nullable=False)
     especie = db.Column(db.String(100), nullable=False)
 
-class Adocao(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    data = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
-    status = db.Column(db.String(50), nullable=False, default='pendente')
-    usuario_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-    animal_id = db.Column(db.Integer, db.ForeignKey('animal.id'), nullable=False)
-
-
-
+#class Adocao(UserMixin, db.Model):
 #class Admin(UserMixin, db.Model):
 
 def registrar_usuario(nome, email, senha):
@@ -56,7 +48,7 @@ def registrar_usuario(nome, email, senha):
     if db.session.query(User).filter_by(email=email).first():
         return False
 
-    novo_usuario = User(nome=nome, email=email, senha=senha)
+    novo_usuario = User(nome=nome, email=email, senha=senha, data_nas=data_nas, cpf=cpf)
     db.session.add(novo_usuario)
     db.session.commit()
 
@@ -83,9 +75,3 @@ def animal_existente(animal_id):
         return False
     else:
         return animal
-    
-def processo_adocao(animal_id, sessao_usuario):
-    nova_adocao = Adocao(animal_id=animal_id, usuario_id=sessao_usuario)
-    db.session.add(nova_adocao)
-    db.session.commit()
-

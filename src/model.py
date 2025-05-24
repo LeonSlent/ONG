@@ -30,7 +30,7 @@ class User(UserMixin, db.Model):
     nome = db.Column(db.String(100), nullable=False)
     email = db.Column(db.String(100), unique=True, nullable=False)
     senha = db.Column(db.String(50))
-    data_nas = db.Column(db.String(15), nullable=False)
+    data_nas = db.Column(db.Date, nullable=False)
     cpf = db.Column(db.String(14), nullable=False, unique=True)
 
 class Animal(db.Model):

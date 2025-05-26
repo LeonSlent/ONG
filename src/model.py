@@ -40,8 +40,14 @@ class Animal(db.Model):
     genero = db.Column(db.String(100), nullable=False)
     especie = db.Column(db.String(100), nullable=False)
 
-#class Adocao(UserMixin, db.Model):
-#class Admin(UserMixin, db.Model):
+class Adocao(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    data = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
+    status = db.Column(db.String(50), nullable=False, default='pendente')
+    usuario_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    animal_id = db.Column(db.Integer, db.ForeignKey('animal.id'), nullable=False)
+
+#class Admin(db.Model):
 
 def registrar_usuario(nome, email, senha, data_nas, cpf):
     # Verifica se o email ja existe no banco de dados
@@ -75,3 +81,8 @@ def animal_existente(animal_id):
         return False
     else:
         return animal
+
+def processo_adocao(animal_id, sessao_usuario):
+    nova_adocao = Adocao(animal_id=animal_id, usuario_id=sessao_usuario)
+    db.session.add(nova_adocao)
+    db.session.commit()

@@ -11,7 +11,7 @@ Sistema de Adoção de Animais para ONG
 
 Esse trabalho é parte do terceiro semestre do curso de Análise e Desenvolvimento de Sistemas do Instituto Federal do Paraná (IFPR).
 
-Este projeto consiste em um sistema de gerenciamento de adoção de animais para uma ONG, implementado em Java, utilizando o paradigma de programação orientada a objetos (POO).
+Este projeto consiste em um sistema de gerenciamento de adoção de animais para uma ONG, implementado em Python, utilizando o paradigma de programação orientada a objetos (POO).
 
 O sistema gerencia o cadastro de adotantes, funcionários, animais e adoções, com funcionalidades para registrar novas adoções, listar adoções realizadas e manter os dados organizados e acessíveis.
 

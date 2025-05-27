@@ -69,16 +69,18 @@
       <ul class="pets-lista">
 
         {% for animal in animais %}
-          <li class="pet-card gato">
-            <img
-              src="{{ url_for('static', filename='img/gatoExterminador.png') }}"
-              alt="{{ animal.nome }}"
-            />
-            <h3>{{ animal.nome }}</h3>
-            <button class="adotar-btn">
-              <a href="{{ url_for('controller_bp.animal_perfil', animal_id=animal.id) }}" class="adotar-btn">QUERO ADOTAR</a>
-            </button>
-          </li>
+          {% if animal.disponivel %}
+            <li class="pet-card gato">
+              <img
+                src="{{ url_for('static', filename='img/gatoExterminador.png') }}"
+                alt="{{ animal.nome }}"
+              />
+              <h3>{{ animal.nome }}</h3>
+              <button class="adotar-btn">
+                <a href="{{ url_for('controller_bp.animal_perfil', animal_id=animal.id) }}" class="adotar-btn">QUERO ADOTAR</a>
+              </button>
+            </li>
+          {% endif %}
         {% else %}
           <li>Não temos nenhum animal disponivel para adoção</li>
         {% endfor %}

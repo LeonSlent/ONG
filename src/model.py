@@ -1,5 +1,5 @@
 from flask_sqlalchemy import SQLAlchemy
-from flask_login import UserMixin, login_user, LoginManager
+from flask_login import UserMixin, login_user, LoginManager, current_user
 from datetime import datetime
 
 # Banco de Dados
@@ -39,6 +39,7 @@ class Animal(db.Model):
     idade = db.Column(db.Integer, nullable=False)
     genero = db.Column(db.String(100), nullable=False)
     especie = db.Column(db.String(100), nullable=False)
+    disponivel = db.Column(db.Boolean, default=True, nullable=False)
 
 class Adocao(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -46,6 +47,8 @@ class Adocao(db.Model):
     status = db.Column(db.String(50), nullable=False, default='pendente')
     usuario_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     animal_id = db.Column(db.Integer, db.ForeignKey('animal.id'), nullable=False)
+    usuario = db.relationship('User', backref='adocoes')
+    animal = db.relationship('Animal', backref='adocoes')
 
 #class Admin(db.Model):
 
@@ -72,9 +75,6 @@ def login_usuario(email, senha):
 
     login_user(usuario)
 
-def listar_animais():
-    return Animal.query.all()
-
 def animal_existente(animal_id):
     animal = db.session.query(Animal).get(animal_id)
     if not animal:
@@ -86,3 +86,16 @@ def processo_adocao(animal_id, sessao_usuario):
     nova_adocao = Adocao(animal_id=animal_id, usuario_id=sessao_usuario)
     db.session.add(nova_adocao)
     db.session.commit()
+
+
+def listar_animais():
+    return Animal.query.filter_by(disponivel=True).all()
+
+
+def listar_adocoes():
+    return Adocao.query.filter_by(usuario_id=current_user.id).all()
+
+def animal_indisponivel(animal):
+    animal.disponivel = False
+    db.session.commit()
+

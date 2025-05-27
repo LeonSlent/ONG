@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, request, redirect, url_for
 from flask_login import login_required, current_user, logout_user
-from model import registrar_usuario, registrar_animal, login_usuario, listar_animais, animal_existente, processo_adocao
+from model import registrar_usuario, registrar_animal, login_usuario, listar_animais, animal_existente, processo_adocao, listar_adocoes, animal_indisponivel
 from datetime import datetime
 
 
@@ -57,7 +57,8 @@ def logout():
 @controller_bp.route('/user')
 @login_required
 def user():
-    return render_template('user.html', nome=current_user.nome)
+    lista = listar_adocoes()
+    return render_template('user.html', nome=current_user.nome, adocoes=lista)
 
 # Rota para cadastrar o animal
 @controller_bp.route('/register_animal', methods=['GET', 'POST'])
@@ -76,12 +77,18 @@ def register_animal():
     return render_template('register_animal.html')
 
 # Rota do animal
-@controller_bp.route('/animal/<animal_id>')
+@controller_bp.route('/animal/<animal_id>', methods=['GET', 'POST'])
 @login_required
 def animal_perfil(animal_id):
-    if animal_existente(animal_id) is False:
-        return render_template('home.html')
+    # Verifica se o id do animal procurado existe, se não existir, o usuario é direcionado para a pagina home
     animal = animal_existente(animal_id)
+    if not animal:
+        return render_template('home.html')
+    
+
+    if request.method == 'POST':
+        animal_indisponivel(animal)
+        return redirect(url_for('controller_bp.adotar', animal_id=animal.id))
     
     return render_template('animal.html', animal=animal)
 

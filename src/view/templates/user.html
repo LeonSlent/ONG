@@ -1,1 +1,17 @@
 <h1>Olá, {{ nome }}</h1>
+
+<br>
+
+
+{% for adocao in adocoes %}
+    <li class="pet-card gato">
+
+        <h1>Animal Adotado: {{ adocao.animal.nome }}</h1>
+        <h1>Data: {{ adocao.data.strftime('%d/%m/%Y') }}</h1>
+        <h1>Hora: {{ adocao.data.strftime('%H:%M') }}</h1>
+        <h1>Status: {{ adocao.status }}</h1>
+
+    </li>
+{% else %}
+    <li>Você ainda não adotou nenhum animal</li>
+{% endfor %}

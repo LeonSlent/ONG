@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, request, redirect, url_for
 from flask_login import login_required, current_user, logout_user
-from model import registrar_usuario, registrar_animal, login_usuario, listar_animais, animal_existente, processo_adocao, listar_adocoes, animal_indisponivel
+from model import registrar_usuario, registrar_animal, login_usuario, listar_animais, animal_existente, processo_adocao, listar_adocoes, animal_indisponivel, alterar_status_adocao
 from datetime import datetime
 
 
@@ -58,7 +58,16 @@ def logout():
 @login_required
 def user():
     lista = listar_adocoes()
+
     return render_template('user.html', nome=current_user.nome, adocoes=lista)
+
+@controller_bp.route('/alterar_status/<adocao_id>', methods=['GET', 'POST'])
+@login_required
+def alterar_status(adocao_id):
+    status = request.form['status']
+    alterar_status_adocao(adocao_id, status)
+    return redirect(url_for('controller_bp.user'))
+
 
 # Rota para cadastrar o animal
 @controller_bp.route('/register_animal', methods=['GET', 'POST'])

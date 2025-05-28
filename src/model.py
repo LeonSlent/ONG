@@ -99,3 +99,8 @@ def animal_indisponivel(animal):
     animal.disponivel = False
     db.session.commit()
 
+def alterar_status_adocao(adocao_id, novo_status):
+    adocao = db.session.query(Adocao).get(adocao_id)
+    if adocao:
+        adocao.status = novo_status
+        db.session.commit()

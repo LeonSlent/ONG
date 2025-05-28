@@ -4,12 +4,26 @@
 
 
 {% for adocao in adocoes %}
-    <li class="pet-card gato">
+    <li>
 
         <h1>Animal Adotado: {{ adocao.animal.nome }}</h1>
         <h1>Data: {{ adocao.data.strftime('%d/%m/%Y') }}</h1>
         <h1>Hora: {{ adocao.data.strftime('%H:%M') }}</h1>
         <h1>Status: {{ adocao.status }}</h1>
+
+        <form method="POST" action="{{ url_for('controller_bp.alterar_status', adocao_id=adocao.id) }}">
+            <select name="status" id="status" required> 
+                <option value="">Alterar Status</option>
+                <option value="pendente">Pendente</option>
+                <option value="andamento">Andamento</option>
+                <option value="aceito">Aceito</option>
+                <option value="finalizado">Finalizado</option>
+                <option value="cancelado">Cancelado</option>
+            </select>
+
+            <button type="submit">ALTERAR</button>
+
+        </form>
 
     </li>
 {% else %}

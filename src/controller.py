@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, request, redirect, url_for
 from flask_login import login_required, current_user, logout_user
-from model import registrar_usuario, registrar_animal, login_usuario, listar_animais, animal_existente, processo_adocao, listar_adocoes, animal_indisponivel, alterar_status_adocao
+from model import Tipo_User, registrar_usuario, registrar_animal, login_usuario, listar_animais, animal_existente, processo_adocao, listar_adocoes, animal_indisponivel, alterar_status_adocao
 from datetime import datetime
 
 
@@ -73,6 +73,8 @@ def alterar_status(adocao_id):
 @controller_bp.route('/register_animal', methods=['GET', 'POST'])
 @login_required
 def register_animal():
+    if not current_user.is_funcionario():
+        return redirect(url_for('controller_bp.home'))
     if request.method == 'POST':
         nome = request.form['nome']
         idade = request.form['idade']

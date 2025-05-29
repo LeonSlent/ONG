@@ -1,6 +1,8 @@
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import UserMixin, login_user, LoginManager, current_user
 from datetime import datetime
+from enum import Enum
+from sqlalchemy import Enum as SqlEnum
 
 # Banco de Dados
 db = SQLAlchemy()
@@ -25,6 +27,10 @@ login_manager = LoginManager()
 def user_loader(id):
     return db.session.query(User).filter_by(id=id).first()
 
+class Tipo_User(Enum):
+    CLIENTE = 'cliente'
+    FUNCIONARIO = 'funcionario'
+
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     nome = db.Column(db.String(100), nullable=False)
@@ -32,6 +38,10 @@ class User(UserMixin, db.Model):
     senha = db.Column(db.String(50))
     data_nas = db.Column(db.Date, nullable=False)
     cpf = db.Column(db.String(14), nullable=False, unique=True)
+    tipo_usuario = db.Column(SqlEnum(Tipo_User), nullable=False)
+
+    def is_funcionario(self):
+        return self.tipo_usuario == Tipo_User.FUNCIONARIO
 
 class Animal(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -57,7 +67,7 @@ def registrar_usuario(nome, email, senha, data_nas, cpf):
     if db.session.query(User).filter_by(email=email).first():
         return False
 
-    novo_usuario = User(nome=nome, email=email, senha=senha, data_nas=data_nas, cpf=cpf)
+    novo_usuario = User(nome=nome, email=email, senha=senha, data_nas=data_nas, cpf=cpf, tipo_user=Tipo_User.CLIENTE)
     db.session.add(novo_usuario)
     db.session.commit()
 

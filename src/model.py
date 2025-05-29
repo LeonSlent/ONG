@@ -67,7 +67,7 @@ def registrar_usuario(nome, email, senha, data_nas, cpf):
     if db.session.query(User).filter_by(email=email).first():
         return False
 
-    novo_usuario = User(nome=nome, email=email, senha=senha, data_nas=data_nas, cpf=cpf, tipo_user=Tipo_User.CLIENTE)
+    novo_usuario = User(nome=nome, email=email, senha=senha, data_nas=data_nas, cpf=cpf, tipo_usuario=Tipo_User.CLIENTE)
     db.session.add(novo_usuario)
     db.session.commit()
 

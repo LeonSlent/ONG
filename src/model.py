@@ -64,7 +64,7 @@ class Adocao(db.Model):
 
 def registrar_usuario(nome, email, senha, data_nas, cpf):
     # Verifica se o email ja existe no banco de dados
-    if db.session.query(User).filter_by(email=email).first():
+    if db.session.query(User).filter_by(email=email).first() or db.session.query(User).filter_by(cpf=cpf).first() :
         return False
 
     novo_usuario = User(nome=nome, email=email, senha=senha, data_nas=data_nas, cpf=cpf, tipo_usuario=Tipo_User.CLIENTE)

@@ -1,8 +1,7 @@
 from flask import Blueprint, render_template, request, redirect, url_for
 from flask_login import login_required, current_user, logout_user
-from model import registrar_usuario, registrar_animal, login_usuario, listar_animais, animal_existente, processo_adocao, listar_adocoes, animal_indisponivel, alterar_status_adocao
+from model import registrar_usuario, registrar_animal, login_usuario, listar_animais, animal_existente, processo_adocao, listar_adocoes, animal_indisponivel, alterar_status_adocao, tratamento_imagem
 from datetime import datetime
-
 
 # Cria o Blueprint
 controller_bp = Blueprint('controller_bp', __name__, template_folder='../view/templates')
@@ -80,8 +79,11 @@ def register_animal():
         idade = request.form['idade']
         genero = request.form['genero']
         especie = request.form['especie']
+        imagem = request.files['imagem']
+
+        nome_imagem = tratamento_imagem(imagem)
         # Chama a função do model para criar a instancia no banco de dados
-        registrar_animal(nome, idade, genero, especie)
+        registrar_animal(nome, idade, genero, especie, nome_imagem)
         
         return redirect(url_for('controller_bp.home'))
 

@@ -77,7 +77,7 @@
           {% if animal.disponivel %}
             <li class="pet-card gato">
               <img
-                src="{{ url_for('static', filename='img/gatoExterminador.png') }}"
+                src="{{ url_for('static', filename='uploads/' + animal.nome_imagem) }}"
                 alt="{{ animal.nome }}"
               />
               <h3>{{ animal.nome }}</h3>

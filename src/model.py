@@ -4,10 +4,14 @@ from datetime import datetime
 from enum import Enum
 from sqlalchemy import Enum as SqlEnum
 from pytz import timezone
+import os
+from uuid import uuid4
 
 
 # Configura o horario do brasil para utilizar no banco de dados
 horario_brasil = timezone('America/Sao_Paulo')
+
+UPLOAD_FOLDER = 'view/static/uploads'
 
 # Banco de Dados
 db = SQLAlchemy()
@@ -55,6 +59,7 @@ class Animal(db.Model):
     genero = db.Column(db.String(100), nullable=False)
     especie = db.Column(db.String(100), nullable=False)
     disponivel = db.Column(db.Boolean, default=True, nullable=False)
+    nome_imagem = db.Column(db.String(250), nullable=False)
 
 class Adocao(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -78,8 +83,8 @@ def registrar_usuario(nome, email, senha, data_nas, cpf):
 
     login_user(novo_usuario)
 
-def registrar_animal(nome, idade, genero, especie):
-    novo_animal = Animal(nome=nome, idade=idade, genero=genero, especie=especie)
+def registrar_animal(nome, idade, genero, especie, nome_imagem):
+    novo_animal = Animal(nome=nome, idade=idade, genero=genero, especie=especie, nome_imagem=nome_imagem)
     db.session.add(novo_animal)
     db.session.commit()
 
@@ -119,3 +124,10 @@ def alterar_status_adocao(adocao_id, novo_status):
     if adocao:
         adocao.status = novo_status
         db.session.commit()
+
+def tratamento_imagem(imagem):
+    extensao = imagem.filename.rsplit('.', 1)[1].lower()
+    nome_imagem = f"{uuid4()}.{extensao}"
+    imagem.save(os.path.join(UPLOAD_FOLDER, nome_imagem))
+
+    return nome_imagem

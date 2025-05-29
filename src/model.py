@@ -3,6 +3,11 @@ from flask_login import UserMixin, login_user, LoginManager, current_user
 from datetime import datetime
 from enum import Enum
 from sqlalchemy import Enum as SqlEnum
+from pytz import timezone
+
+
+# Configura o horario do brasil para utilizar no banco de dados
+horario_brasil = timezone('America/Sao_Paulo')
 
 # Banco de Dados
 db = SQLAlchemy()
@@ -53,7 +58,7 @@ class Animal(db.Model):
 
 class Adocao(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    data = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
+    data = db.Column(db.DateTime, default=lambda: datetime.now(horario_brasil), nullable=False)
     status = db.Column(db.String(50), nullable=False, default='pendente')
     usuario_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     animal_id = db.Column(db.Integer, db.ForeignKey('animal.id'), nullable=False)

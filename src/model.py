@@ -131,3 +131,29 @@ def tratamento_imagem(imagem):
     imagem.save(os.path.join(UPLOAD_FOLDER, nome_imagem))
 
     return nome_imagem
+
+
+"""
+Criar um User como Funcionario
+Abra o terminal dentro da pasta src
+Digite os seguinte comandos:
+
+flask shell
+
+from model import User, Tipo_User, db
+
+from datetime import date
+
+novo_funcionario = User(
+    nome='Admin',
+    email='admin@gmail.com',
+    senha='123',
+    data_nas=date(9999, 9, 9),
+    cpf='000.000.000-00',
+    tipo_usuario=Tipo_User.FUNCIONARIO
+)
+
+db.session.add(novo_funcionario)
+db.session.commit()
+
+"""

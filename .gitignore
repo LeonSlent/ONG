@@ -1,3 +1,6 @@
 ong/
 test*
 idea/
+
+instance 
+src/__pycache__

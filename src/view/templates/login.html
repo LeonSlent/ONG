@@ -4,15 +4,24 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login - Adote BLM</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}" />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/styles.css') }}"
+    />
   </head>
   <body>
     <header class="cabecalho">
       <section class="links">
-        <a href="{{ url_for('controller_bp.home') }}" class="header-link">ADOTE BLM</a>
+        <a href="{{ url_for('controller_bp.home') }}" class="header-link"
+          >ADOTE BLM</a
+        >
         <div>
-          <a href="{{ url_for('controller_bp.login') }}" class="header-link">LOGIN</a>
-          <a href="{{ url_for('controller_bp.register') }}" class="header-link">CADASTRO</a>
+          <a href="{{ url_for('controller_bp.login') }}" class="header-link"
+            >LOGIN</a
+          >
+          <a href="{{ url_for('controller_bp.register') }}" class="header-link"
+            >CADASTRO</a
+          >
         </div>
       </section>
       <div class="banner-conteudo">
@@ -23,23 +32,38 @@
 
     <!-- Formulario do backend -->
     <form class="form-login" method="POST">
-    
       <div class="campos-login">
-        <input class="input-form input-login" type="email" name="email" id="email" placeholder="Email" required> 
+        <input
+          class="input-form input-login"
+          type="email"
+          name="email"
+          id="email"
+          placeholder="Email"
+          required
+        />
 
-        <input class="input-form input-login" type="password" name="senha" id="senha" placeholder="Senha" required> 
-
+        <input
+          class="input-form input-login"
+          type="password"
+          name="senha"
+          id="senha"
+          placeholder="Senha"
+          required
+        />
       </div>
 
       <div class="conta-btns">
         <button class="btn botao-conta" type="submit">Logar</button>
       </div>
-      </form>
-
+    </form>
 
     <h3 class="redireciona-conta">
       Não tem uma conta? Faça seu cadastro
-      <a href="#" class="redireciona-conta-link">aqui</a>
+      <a
+        href="{{ url_for('controller_bp.register') }}"
+        class="redireciona-conta-link"
+        >aqui</a
+      >
     </h3>
     <footer class="rodape">
       <ul class="rodape-links">

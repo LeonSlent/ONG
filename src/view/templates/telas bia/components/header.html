@@ -1,0 +1,26 @@
+<header class="cabecalho">
+      <section class="links">
+        <a href="{{ url_for('controller_bp.home') }}" class="header-link">ADOTE BLM</a>
+        <div>
+          {% if current_user.is_authenticated %}
+            <a href="{{ url_for('controller_bp.logout') }}" class="header-link">SAIR</a>
+            <a href="{{ url_for('controller_bp.user') }}" class="header-link">USUARIO</a>
+            
+            {% if current_user.tipo_usuario.value == 'funcionario' %}
+            <a href="{{ url_for('controller_bp.register_animal') }}" class="header-link">REGISTRAR ANIMAIS</a>
+            {% endif %}
+
+          {% else %}
+            <a href="{{ url_for('controller_bp.login') }}" class="header-link">LOGIN</a>
+            <a href="{{ url_for('controller_bp.register') }}" class="header-link">CADASTRO</a>
+          {% endif %}
+        </div>
+      </section>
+      <div class="banner-conteudo">
+        <h1 class="banner-conteudo-titulo">UMA CAMPANHA ESPECIAL</h1>
+        <p class="banner-conteudo-descricao">
+          Uma seleção especial de peludinhos que buscam um lar para chamar de
+          seu
+        </p>
+      </div>
+    </header>

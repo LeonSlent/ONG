@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, request, redirect, url_for
 from flask_login import login_required, current_user, logout_user
-from model import registrar_usuario, registrar_animal, login_usuario, listar_animais, animal_existente, processo_adocao, listar_adocoes, animal_indisponivel, alterar_status_adocao, tratamento_imagem
+from model import registrar_usuario, registrar_animal, login_usuario, listar_animais, animal_existente, processo_adocao, listar_adocoes, animal_indisponivel, animal_disponivel, alterar_status_adocao, tratamento_imagem
 from datetime import datetime
 
 # Cria o Blueprint
@@ -16,11 +16,11 @@ def home():
 @controller_bp.route('/register', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
-        nome = request.form['nome']
-        email = request.form['email']
-        senha = request.form['senha']
-        data_nas_str = request.form['data_nas']
-        cpf = request.form['cpf']
+        nome = request.form.get('nome')
+        email = request.form.get('email')
+        senha = request.form.get('senha')
+        data_nas_str = request.form.get('data_nas')
+        cpf = request.form.get('cpf')
         # Converte string para datetime.date
         data_nas = datetime.strptime(data_nas_str, '%Y-%m-%d').date()
         # Chama a função do model para criar a instancia no banco de dados
@@ -35,8 +35,8 @@ def register():
 @controller_bp.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        email = request.form['email']
-        senha = request.form['senha']
+        email = request.form.get('email')
+        senha = request.form.get('senha')
         # Chama a função do model para logar o usuario na sessão, se o login estiver incorreto, ele retorna para a rota de login novamente
         if login_usuario(email, senha) is False:
             return render_template('login.html')
@@ -63,8 +63,12 @@ def user():
 @controller_bp.route('/alterar_status/<adocao_id>', methods=['GET', 'POST'])
 @login_required
 def alterar_status(adocao_id):
-    status = request.form['status']
+    status = request.form.get('status')
     alterar_status_adocao(adocao_id, status)
+    if status == 'cancelado':
+        animal = animal_existente(adocao_id)
+        animal_disponivel(animal)
+        
     return redirect(url_for('controller_bp.user'))
 
 

@@ -10,3 +10,17 @@ function filtrarAnimais() {
     exibirAnimais(animaisFiltrados);
 }
 
+function mostrarSecao(id) {
+  const secoes = ['secao-dados', 'secao-tarefas', 'secao-cadastros'];
+  secoes.forEach(secao => {
+    document.getElementById(secao).style.display = (secao === id) ? 'block' : 'none';
+  });
+s
+  document.querySelectorAll('.nav .btn').forEach(btn => {
+    if (btn.textContent === id.split('-')[1].toUpperCase()) {
+      btn.classList.add('ativo');
+    } else {
+      btn.classList.remove('ativo');
+    }
+  });
+}

@@ -309,3 +309,31 @@
 .botao-cadastro {
   text-align: center;
 }
+
+.card {
+  display: flex;
+  gap: 24px;
+  margin: 2em auto;
+  max-width: 800px;
+  background-color: var(--branco);
+  padding: 20px;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.card img {
+  max-width: 250px;
+  border-radius: 12px;
+}
+
+.card-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.form-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
+}

@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="form-login">
+  <h2 class="titulo">SEU PERFIL</h2>
+
+  <!-- btns filtros -->
+  <div class="conta-btns">
+    <button class="btn" onclick="mostrarSecao('dados')">DADOS</button>
+    <button class="btn" onclick="mostrarSecao('tarefas')">TAREFAS</button>
+    <button class="btn" onclick="mostrarSecao('cadastros')">CADASTROS</button>
+  </div>
+
+  <!-- dados -->
+  <form id="secao-dados" class="form-login" style="display: none;">
+    <div class="campos-login">
+      <label>Nome:<input type="text" class="input-form" /></label>
+      <label>Email:<input type="email" class="input-form" /></label>
+      <label>Telefone:<input type="text" class="input-form" /></label>
+      <label>CPF:<input type="text" class="input-form" /></label>
+      <label>CEP:<input type="text" class="input-form" /></label>
+      <label>Rua:<input type="text" class="input-form" /></label>
+      <label>Senha:<input type="password" class="input-form" /></label>
+    </div>
+    <button type="submit" class="botao-conta">ATUALIZAR DADOS</button>
+  </form>
+
+  <!-- tarefas  -->
+  <div id="secao-tarefas">
+    <button class="input-form"><strong>Solicitação de adoção</strong></button>
+    <button class="input-form"><strong>Solicitação de adoção</strong></button>
+  </div>
+
+  <!-- cadastros  -->
+   <form id="secao-cadastros" class="form-login" style="display: none;">
+<div class="campos-login">
+    <label>Nome:<input type="text" class="input-form" /></label>
+
+    <label>Idade:
+    <select class="input-form">
+        <option value="">Selecione</option>
+        <option value="filhote">Filhote</option>
+        <option value="adulto">Adulto</option>
+    </select>
+    </label>
+
+    <label>Sexo:
+    <select class="input-form">
+        <option value="">Selecione</option>
+        <option value="macho">Macho</option>
+        <option value="femea">Fêmea</option>
+    </select>
+    </label>
+
+    <label>Espécie:
+    <select class="input-form">
+        <option value="">Selecione</option>
+        <option value="gato">Gato</option>
+        <option value="cachorro">Cachorro</option>
+    </select>
+    </label>
+
+    <label>Porte:
+    <select class="input-form">
+        <option value="">Selecione</option>
+        <option value="pequeno">Pequeno</option>
+        <option value="medio">Médio</option>
+        <option value="grande">Grande</option>
+    </select>
+    </label>
+
+    <label>Descrição:
+    <textarea class="input-form" rows="4"></textarea>
+    </label>
+
+    <label>Imagem:
+    <input type="file" class="input-form" />
+    </label>
+</div>
+
+<button type="submit" class="botao-conta">CADASTRAR ANIMAL</button>
+    </form>
+{% endblock %}

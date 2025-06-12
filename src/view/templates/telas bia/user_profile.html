@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="form-login">
+  <h2 class="titulo">SEU PERFIL</h2>
+  <div class="form-wrapper">
+    <div class="form-user-dados">
+        <form action="" method="post" class="campos-login">
+          <input type="text" name="nome" placeholder="Nome" class="input-form" required />
+          <input type="email" name="email" placeholder="Email" class="input-form" required />
+          <input type="tel" name="telefone" placeholder="Telefone" class="input-form" />
+          <input type="text" name="cpf" placeholder="CPF" class="input-form" />
+          <input type="text" name="cep" placeholder="CEP" class="input-form" />
+          <input type="text" name="rua" placeholder="Rua" class="input-form" />
+          <input type="password" name="senha" placeholder="Senha" class="input-form" />
+          <button type="submit" class="botao-conta">ATUALIZAR DADOS</button>
+        </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

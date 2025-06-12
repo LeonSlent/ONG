@@ -5,12 +5,15 @@
 
 {% for adocao in adocoes %}
     <li>
-
+        {% if current_user.tipo_usuario.value == 'funcionario' %}
+        <h1>Nome Solicitante: {{ adocao.usuario.nome }}</h1>
+        {% endif %}
         <h1>Animal Adotado: {{ adocao.animal.nome }}</h1>
         <h1>Data: {{ adocao.data.strftime('%d/%m/%Y') }}</h1>
         <h1>Hora: {{ adocao.data.strftime('%H:%M') }}</h1>
         <h1>Status: {{ adocao.status }}</h1>
-
+        
+        {% if current_user.tipo_usuario.value == 'funcionario' %}
         <form method="POST" action="{{ url_for('controller_bp.alterar_status', adocao_id=adocao.id) }}">
             <select name="status" id="status" required> 
                 <option value="">Alterar Status</option>
@@ -20,10 +23,19 @@
                 <option value="finalizado">Finalizado</option>
                 <option value="cancelado">Cancelado</option>
             </select>
-
             <button type="submit">ALTERAR</button>
-
         </form>
+        {% endif %}
+
+        {% if current_user.tipo_usuario.value == 'cliente' and adocao.status != 'cancelado' %}
+        <form method="POST" action="{{ url_for('controller_bp.alterar_status', adocao_id=adocao.id) }}">
+            <input type="hidden" name="status" value="cancelado">
+            <button type="submit">CANCELAR</button>
+        </form>
+        {% endif %}
+            
+
+        
 
     </li>
 {% else %}

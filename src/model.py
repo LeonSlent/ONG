@@ -113,10 +113,17 @@ def listar_animais():
 
 
 def listar_adocoes():
-    return Adocao.query.filter_by(usuario_id=current_user.id).all()
+    if current_user.tipo_usuario.value == 'cliente':
+        return Adocao.query.filter_by(usuario_id=current_user.id).all()
+    elif current_user.tipo_usuario.value == 'funcionario':
+        return Adocao.query.all()
 
 def animal_indisponivel(animal):
     animal.disponivel = False
+    db.session.commit()
+
+def animal_disponivel(animal):
+    animal.disponivel = True
     db.session.commit()
 
 def alterar_status_adocao(adocao_id, novo_status):
@@ -126,6 +133,9 @@ def alterar_status_adocao(adocao_id, novo_status):
         db.session.commit()
 
 def tratamento_imagem(imagem):
+    if not os.path.exists(UPLOAD_FOLDER):
+        os.makedirs(UPLOAD_FOLDER)
+
     extensao = imagem.filename.rsplit('.', 1)[1].lower()
     nome_imagem = f"{uuid4()}.{extensao}"
     imagem.save(os.path.join(UPLOAD_FOLDER, nome_imagem))

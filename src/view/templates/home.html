@@ -1,38 +1,6 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Home - Adote BLM</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}" />
-  </head>
-  <body>
-    <header class="cabecalho">
-      <section class="links">
-        <a href="{{ url_for('controller_bp.home') }}" class="header-link">ADOTE BLM</a>
-        <div>
-          {% if current_user.is_authenticated %}
-            <a href="{{ url_for('controller_bp.logout') }}" class="header-link">SAIR</a>
-            <a href="{{ url_for('controller_bp.user') }}" class="header-link">USUARIO</a>
-            
-            {% if current_user.tipo_usuario.value == 'funcionario' %}
-            <a href="{{ url_for('controller_bp.register_animal') }}" class="header-link">REGISTRAR ANIMAIS</a>
-            {% endif %}
+{% extends "components/base.html" %}
 
-          {% else %}
-            <a href="{{ url_for('controller_bp.login') }}" class="header-link">LOGIN</a>
-            <a href="{{ url_for('controller_bp.register') }}" class="header-link">CADASTRO</a>
-          {% endif %}
-        </div>
-      </section>
-      <div class="banner-conteudo">
-        <h1 class="banner-conteudo-titulo">UMA CAMPANHA ESPECIAL</h1>
-        <p class="banner-conteudo-descricao">
-          Uma seleção especial de peludinhos que buscam um lar para chamar de
-          seu
-        </p>
-      </div>
-    </header>
+{% block content %}
     <nav class="wrap">
       <ul class="nav">
         <li>
@@ -68,14 +36,11 @@
       </ul>
     </nav>
 
-
-
     <section class="pets">
       <ul class="pets-lista">
-
         {% for animal in animais %}
           {% if animal.disponivel %}
-            <li class="pet-card gato">
+            <li class="pet-card">
               <img
                 src="{{ url_for('static', filename='uploads/' + animal.nome_imagem) }}"
                 alt="{{ animal.nome }}"
@@ -89,41 +54,7 @@
         {% else %}
           <li>Não temos nenhum animal disponivel para adoção</li>
         {% endfor %}
-
       </ul>
     </section>
+{% endblock %}
 
-
-    <footer class="rodape">
-      <ul class="rodape-links">
-        <li class="rodape-links-btn">
-          <a
-            href="https://www.facebook.com/login/?next=https%3A%2F%2Fwww.facebook.com%2F%3Flocale%3Dpt_BR"
-            class="link"
-          >
-            <img
-              src="{{ url_for('static', filename='img/facebook.png') }}"
-              alt="Faceboook"
-              class="link-logo"
-          /></a>
-        </li>
-        <li class="rodape-links-btn">
-          <a href="https://www.instagram.com/" class="link">
-            <img
-              src="{{ url_for('static', filename='img/instragram.png') }}"
-              alt="Instagram"
-              class="link-logo"
-          /></a>
-        </li>
-        <li class="rodape-links-btn">
-          <a href="https://www.linkedin.com/feed/" class="link">
-            <img
-              src="{{ url_for('static', filename='img/linkedin.png') }}"
-              alt="LinkedIn"
-              class="link-logo"
-          /></a>
-        </li>
-      </ul>
-    </footer>
-  </body>
-</html>

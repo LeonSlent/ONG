@@ -1,76 +1,49 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Cadastro - Adote BLM</title>
-    <link
-      rel="stylesheet"
-      href="{{ url_for('static', filename='css/styles.css') }}"
-    />
-  </head>
-  <body>
-    <header class="cabecalho">
-      <section class="links">
-        <a href="{{ url_for('controller_bp.home') }}" class="header-link"
-          >ADOTE BLM</a
-        >
-        <div>
-          <a href="{{ url_for('controller_bp.login') }}" class="header-link"
-            >LOGIN</a
-          >
-          <a href="{{ url_for('controller_bp.register') }}" class="header-link"
-            >CADASTRO</a
-          >
-        </div>
-      </section>
-      <div class="banner-conteudo">
-        <h1 class="banner-conteudo-titulo">SEJA BEM VINDO!</h1>
-      </div>
-    </header>
+{% extends "components/base.html" %}
+
+{% block content %}
     <h2 class="titulo titulo-cadastro">FAÇA SEU CADASTRO</h2>
 
-    <!-- Formulario do backend -->
+    <!-- formulario do backend -->
     <form method="POST" class="form-cadastro">
-      <div class="form-grupo">
+    <div class="form-grupo">
         <div class="form-labels">
-          <label for="nome">Nome:</label>
-          <label for="email">Email:</label>
-          <label for="senha">Senha:</label>
-          <label for="data_nas">Data de Nascimento</label>
-          <label for="cpf">CPF</label>
+        <label for="nome">Nome:</label>
+        <label for="email">Email:</label>
+        <label for="senha">Senha:</label>
+        <label for="data_nas">Data de Nascimento</label>
+        <label for="cpf">CPF</label>
         </div>
 
         <div class="form-inputs">
-          <input
+        <input
             class="input-form input-cadastro"
             type="text"
             id="nome"
             name="nome"
             required
-          />
-          <input
+        />
+        <input
             class="input-form input-cadastro"
             type="email"
             id="email"
             name="email"
             required
-          />
-          <input
+        />
+        <input
             class="input-form input-cadastro"
             type="password"
             id="senha"
             name="senha"
             required
-          />
-          <input
+        />
+        <input
             class="input-form input-cadastro"
             type="date"
             id="data_nas"
             name="data_nas"
             required
-          />
-          <input
+        />
+        <input
             class="input-form input-cadastro"
             type="text"
             id="cpf"
@@ -78,68 +51,36 @@
             maxlength="14"
             required
             oninput="formatCPF(this)"
-          />
+        />
         </div>
-      </div>
+    </div>
 
-      <div class="conta-btns">
+    <div class="conta-btns">
         <button class="btn botao-conta" type="submit">Cadastrar</button>
-      </div>
+    </div>
     </form>
 
     <script>
-      function formatCPF(input) {
-        // Remove qualquer caractere não numérico
+    function formatCPF(input) {
+        // remove qualquer caractere não numérico
         var cpf = input.value.replace(/\D/g, "");
 
-        // Adiciona a formatação do CPF
+        // adiciona a formatação do CPF
         if (cpf.length <= 11) {
-          cpf = cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{1})/, "$1.$2.$3-$4");
+        cpf = cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{1})/, "$1.$2.$3-$4");
         }
 
-        // Atualiza o valor do campo de entrada com a formatação
+        // atualiza o valor do campo de entrada com a formatação
         input.value = cpf;
-      }
+    }
     </script>
 
     <h2 class="redireciona-conta redireciona-login">
-      Já tem uma conta? Faça seu login
-      <a
+    Já tem uma conta? Faça seu login
+    <a
         href="{{ url_for('controller_bp.login') }}"
         class="redireciona-conta-link"
         >aqui</a
-      >
+    >
     </h2>
-    <footer class="rodape">
-      <ul class="rodape-links">
-        <li class="rodape-links-btn">
-          <a
-            href="https://www.facebook.com/login/?next=https%3A%2F%2Fwww.facebook.com%2F%3Flocale%3Dpt_BR"
-            class="link"
-          >
-            <img
-              src="{{ url_for('static', filename='img/facebook.png') }}"
-              alt="Faceboook"
-              class="link-logo"
-          /></a>
-        </li>
-        <li class="rodape-links-btn">
-          <a href="https://www.instagram.com/" class="link">
-            <img
-              src="{{ url_for('static', filename='img/instragram.png') }}"
-              alt="Instagram"
-              class="link-logo"
-          /></a>
-        </li>
-        <li class="rodape-links-btn">
-          <a href="https://www.linkedin.com/feed/" class="link">
-            <img
-              src="{{ url_for('static', filename='img/linkedin.png') }}"
-              alt="LinkedIn"
-              class="link-logo"
-          /></a>
-        </li>
-      </ul>
-    </footer>
-  </body>
-</html>
+{% endblock %}

@@ -59,6 +59,7 @@ class Animal(db.Model):
     genero = db.Column(db.String(100), nullable=False)
     especie = db.Column(db.String(100), nullable=False)
     disponivel = db.Column(db.Boolean, default=True, nullable=False)
+    descricao = db.Column(db.String(200), nullable=False)
     nome_imagem = db.Column(db.String(250), nullable=False)
 
 class Adocao(db.Model):
@@ -83,8 +84,8 @@ def registrar_usuario(nome, email, senha, data_nas, cpf):
 
     login_user(novo_usuario)
 
-def registrar_animal(nome, idade, genero, especie, nome_imagem):
-    novo_animal = Animal(nome=nome, idade=idade, genero=genero, especie=especie, nome_imagem=nome_imagem)
+def registrar_animal(nome, idade, genero, especie, descricao, nome_imagem):
+    novo_animal = Animal(nome=nome, idade=idade, genero=genero, especie=especie, descricao=descricao, nome_imagem=nome_imagem)
     db.session.add(novo_animal)
     db.session.commit()
 

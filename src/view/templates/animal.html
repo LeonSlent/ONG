@@ -1,8 +1,46 @@
-<h3>Nome: {{ animal.nome }}</h3>
-<h3>Idade: {{ animal.idade }}</h3>
-<h3>Genero: {{ animal.genero }}</h3>
-<h3>Especie: {{ animal.especie }}</h3>
+{% extends "components/base.html" %}
 
-<form method="POST">
-    <button type="submit" class="adotar-btn">ADOTAR AGORA</button>
-</form>
+{% block content %}
+    <div class="card">
+    <img
+        src="{{ url_for('static', filename='uploads/' + animal.nome_imagem) }}"
+        alt="{{ animal.nome }}"
+    />
+    <div class="card-info">
+      <h2>{{ animal.nome }}</h2>
+      <p>{{ animal.especie }} | {{ animal.genero }} | {{ animal.idade }} Anos</p>
+      <p>{{ animal.descricao }}</p>
+
+      {% if animal.disponivel == True %}
+      <form method="POST">
+          <button type="submit" class="adotar-btn">ADOTAR AGORA</button>
+      </form>
+      {% endif %}
+    </div>
+  </div>
+
+
+
+    
+    <section class="pets">
+      <h3>OUTROS BICHINHOS EM BUSCA DE UM LAR</h3>
+      <ul class="pets-lista">
+        {% for bicho in lista %}
+          {% if bicho.disponivel and bicho.id != animal.id %}
+            <li class="pet-card">
+              <img
+                src="{{ url_for('static', filename='uploads/' + bicho.nome_imagem) }}"
+                alt="{{ bicho.nome }}"
+              />
+              <h3>{{ bicho.nome }}</h3>
+              <button class="adotar-btn">
+                <a href="{{ url_for('controller_bp.animal_perfil', animal_id=bicho.id) }}" class="adotar-btn">QUERO ADOTAR</a>
+              </button>
+            </li>
+          {% endif %}
+
+        {% endfor %}
+      </ul>
+    </section>
+{% endblock %}
+

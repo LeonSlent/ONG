@@ -1,100 +1,42 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Login - Adote BLM</title>
-    <link
-      rel="stylesheet"
-      href="{{ url_for('static', filename='css/styles.css') }}"
-    />
-  </head>
-  <body>
-    <header class="cabecalho">
-      <section class="links">
-        <a href="{{ url_for('controller_bp.home') }}" class="header-link"
-          >ADOTE BLM</a
-        >
-        <div>
-          <a href="{{ url_for('controller_bp.login') }}" class="header-link"
-            >LOGIN</a
-          >
-          <a href="{{ url_for('controller_bp.register') }}" class="header-link"
-            >CADASTRO</a
-          >
-        </div>
-      </section>
-      <div class="banner-conteudo">
-        <h1 class="banner-conteudo-titulo">SEJA BEM VINDO!</h1>
-      </div>
-    </header>
-    <h2 class="titulo titulo-login">EFETUE SEU LOGIN</h2>
+{% extends "components/base.html" %}
 
-    <!-- Formulario do backend -->
-    <form class="form-login" method="POST">
-      <div class="campos-login">
-        <input
-          class="input-form input-login"
-          type="email"
-          name="email"
-          id="email"
-          placeholder="Email"
-          required
-        />
+{% block content %}
+  <h2 class="titulo titulo-login">EFETUE SEU LOGIN</h2>
 
-        <input
-          class="input-form input-login"
-          type="password"
-          name="senha"
-          id="senha"
-          placeholder="Senha"
-          required
-        />
-      </div>
+  <!-- formulario do backend -->
+  <form class="form-login" method="POST">
+    <div class="campos-login">
+      <input
+        class="input-form input-login"
+        type="email"
+        name="email"
+        id="email"
+        placeholder="Email"
+        required
+      />
 
-      <div class="conta-btns">
-        <button class="btn botao-conta" type="submit">Logar</button>
-      </div>
-    </form>
+      <input
+        class="input-form input-login"
+        type="password"
+        name="senha"
+        id="senha"
+        placeholder="Senha"
+        required
+      />
+    </div>
 
-    <h3 class="redireciona-conta">
-      Não tem uma conta? Faça seu cadastro
-      <a
-        href="{{ url_for('controller_bp.register') }}"
-        class="redireciona-conta-link"
-        >aqui</a
-      >
-    </h3>
-    <footer class="rodape">
-      <ul class="rodape-links">
-        <li class="rodape-links-btn">
-          <a
-            href="https://www.facebook.com/login/?next=https%3A%2F%2Fwww.facebook.com%2F%3Flocale%3Dpt_BR"
-            class="link"
-          >
-            <img
-              src="{{ url_for('static', filename='img/facebook.png') }}"
-              alt="Faceboook"
-              class="link-logo"
-          /></a>
-        </li>
-        <li class="rodape-links-btn">
-          <a href="https://www.instagram.com/" class="link">
-            <img
-              src="{{ url_for('static', filename='img/instragram.png') }}"
-              alt="Instagram"
-              class="link-logo"
-          /></a>
-        </li>
-        <li class="rodape-links-btn">
-          <a href="https://www.linkedin.com/feed/" class="link">
-            <img
-              src="{{ url_for('static', filename='img/linkedin.png') }}"
-              alt="LinkedIn"
-              class="link-logo"
-          /></a>
-        </li>
-      </ul>
-    </footer>
-  </body>
-</html>
+    <div class="conta-btns">
+      <button class="btn botao-conta" type="submit">Logar</button>
+    </div>
+  </form>
+
+  <h3 class="redireciona-conta">
+    Não tem uma conta? Faça seu cadastro
+    <a
+      href="{{ url_for('controller_bp.register') }}"
+      class="redireciona-conta-link"
+      >aqui</a
+    >
+  </h3>
+{% endblock %}
+

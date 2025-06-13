@@ -58,7 +58,7 @@ def logout():
 def user():
     lista = listar_adocoes()
 
-    return render_template('user.html', nome=current_user.nome, adocoes=lista)
+    return render_template('user.html', current_user=current_user, adocoes=lista)
 
 @controller_bp.route('/alterar_status/<adocao_id>', methods=['GET', 'POST'])
 @login_required
@@ -83,15 +83,14 @@ def register_animal():
         idade = request.form['idade']
         genero = request.form['genero']
         especie = request.form['especie']
+        descricao = request.form['descricao']
         imagem = request.files['imagem']
 
         nome_imagem = tratamento_imagem(imagem)
         # Chama a função do model para criar a instancia no banco de dados
-        registrar_animal(nome, idade, genero, especie, nome_imagem)
+        registrar_animal(nome, idade, genero, especie, descricao, nome_imagem)
         
-        return redirect(url_for('controller_bp.home'))
-
-    return render_template('register_animal.html')
+        return redirect(url_for('controller_bp.user'))
 
 # Rota do animal
 @controller_bp.route('/animal/<animal_id>', methods=['GET', 'POST'])
@@ -107,7 +106,8 @@ def animal_perfil(animal_id):
         animal_indisponivel(animal)
         return redirect(url_for('controller_bp.adotar', animal_id=animal.id))
     
-    return render_template('animal.html', animal=animal)
+    lista = listar_animais()
+    return render_template('animal.html', animal=animal, lista=lista)
 
 @controller_bp.route('/adotar/<animal_id>')
 @login_required

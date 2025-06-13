@@ -1,43 +1,165 @@
-<h1>Olá, {{ nome }}</h1>
+{% extends "components/base.html" %}
 
-<br>
+{% block content %}
+<div class="form-login">
+  
 
+  <!-- Botões -->
+  <div class="conta-btns">
+    <button class="btn" onclick="mostrarTela('perfil')">PERFIL</button>
+    <button class="btn" onclick="mostrarTela('adocoes')">ADOÇÕES</button>
+    {% if current_user.tipo_usuario.value == 'funcionario' %}
+    <button class="btn" onclick="mostrarTela('cadastrar')">CADASTRAR</button>
+    {% endif %}
+    
+  </div>
 
-{% for adocao in adocoes %}
-    <li>
-        {% if current_user.tipo_usuario.value == 'funcionario' %}
-        <h1>Nome Solicitante: {{ adocao.usuario.nome }}</h1>
-        {% endif %}
-        <h1>Animal Adotado: {{ adocao.animal.nome }}</h1>
-        <h1>Data: {{ adocao.data.strftime('%d/%m/%Y') }}</h1>
-        <h1>Hora: {{ adocao.data.strftime('%H:%M') }}</h1>
-        <h1>Status: {{ adocao.status }}</h1>
+  <!-- Seções do Perfil -->
+  <div id="perfil" class="tela" style="display: block;">
+    <h2 class="titulo">MEU PERFIL</h2>
+
+    <div class="perfil-container">
+
+      <div class="perfil-info">
+        <div class="dados-perfil">
+        <h2>Nome</h2>
+        <h1>{{ current_user.nome }}</h1>
+        </div>
         
-        {% if current_user.tipo_usuario.value == 'funcionario' %}
-        <form method="POST" action="{{ url_for('controller_bp.alterar_status', adocao_id=adocao.id) }}">
-            <select name="status" id="status" required> 
-                <option value="">Alterar Status</option>
-                <option value="pendente">Pendente</option>
-                <option value="andamento">Andamento</option>
-                <option value="aceito">Aceito</option>
-                <option value="finalizado">Finalizado</option>
-                <option value="cancelado">Cancelado</option>
-            </select>
-            <button type="submit">ALTERAR</button>
-        </form>
-        {% endif %}
+        <div class="dados-perfil">
+        <h2>Email</h2>
+        <h1>{{ current_user.email }}</h1>
+        </div>
 
-        {% if current_user.tipo_usuario.value == 'cliente' and adocao.status != 'cancelado' %}
-        <form method="POST" action="{{ url_for('controller_bp.alterar_status', adocao_id=adocao.id) }}">
-            <input type="hidden" name="status" value="cancelado">
-            <button type="submit">CANCELAR</button>
-        </form>
-        {% endif %}
+        <div class="dados-perfil">
+        <h2>Data Nascimento</h2>
+        <h1>{{ current_user.data_nas }}</h1>
+        </div>
+
+        <div class="dados-perfil">
+        <h2>Cpf</h2>
+        <h1>{{ current_user.cpf }}</h1>
+        </div>
+      </div>
+
+      <img src="../static/img/perfil.jpg" class="perfil-img" alt="">
+
+    </div>
+    
+  </div>
+
+  <!-- Seções de Adoções -->
+  <div id="adocoes" class="tela" style="display: none;">
+    <h2 class="titulo">ADOÇÕES</h2>
+
+    {% for adocao in adocoes %}
+        <li class="card-adocao">
+            <img
+              src="{{ url_for('static', filename='uploads/' + adocao.animal.nome_imagem) }}"
+              alt="{{ adocao.animal.nome }}" class="card-adocao-img"/>
+    
+            <div class="card-adocao-info">
+            <h1>{{ adocao.usuario.nome }}</h1>
+            <h1>{{ adocao.animal.nome }}</h1>
+            <h1>{{ adocao.data.strftime('%d/%m/%Y') }}</h1>
+            <h1>{{ adocao.data.strftime('%H:%M') }}</h1>
+            <h1>{{ adocao.status }}</h1>
+            </div>            
+
+            {% if current_user.tipo_usuario.value == 'funcionario' %}
+            <form method="POST" action="{{ url_for('controller_bp.alterar_status', adocao_id=adocao.id) }}">
+                <select class="adocao-btn" name="status" id="status" required> 
+                    <option value="">Escolher</option>
+                    <option value="pendente">Pendente</option>
+                    <option value="aceito">Aceito</option>
+                    <option value="finalizado">Finalizado</option>
+                    <option value="cancelado">Cancelado</option>
+                </select>
+                <button type="submit" class="adocao-btn">ALTERAR</button>
+            </form>
+            {% endif %}
+
+            {% if current_user.tipo_usuario.value == 'cliente' and adocao.status not in ['cancelado', 'finalizado'] %}
+            <form method="POST" action="{{ url_for('controller_bp.alterar_status', adocao_id=adocao.id) }}">
+                <input type="hidden" name="status" value="cancelado">
+                <button type="submit" class="adocao-btn">CANCELAR</button>
+            </form>
+            {% endif %}
+        </li>
+
+    {% else %}
+        <li>Não encontramos nenhuma adoção</li>
+    {% endfor %}
+
+
+  </div>
+
+  <!-- Seções de Cadastro de animais -->
+  <div id="cadastrar" class="tela" style="display: none;">
+    <h2 class="titulo">CADASTRAR ANIMAL</h2>
+
+    <form method="POST" action="{{ url_for('controller_bp.register_animal') }}" class="form-cadastro" enctype="multipart/form-data">
+
+        <div class="form-grupo">
+
+          <div class="form-labels">
+            <label for="nome">Nome:</label>
+            <label for="idade">Idade:</label>
+            <label for="genero">Gênero:</label>
+            <label for="especie">Espécie:</label>
+            <label for="descricao">Descrição:</label>
             
+          </div>
 
+
+          <div class="form-inputs">
+            <input class="input-form input-cadastro" type="text" name="nome" id="nome" required>
+            
+            <input class="input-form input-cadastro" type="number" name="idade" id="idade" required min="0">
+             
+            <select class="input-form input-cadastro" name="genero" id="genero" required> 
+                <option value="">Selecione</option>
+                <option value="Macho">Macho</option>
+                <option value="Femea">Fêmea</option>
+            </select>
+
+            <select class="input-form input-cadastro" name="especie" id="especie" required> 
+                <option value="">Selecione</option>
+                <option value="Gato">Gato</option>
+                <option value="Cão">Cão</option>
+            </select>
+
+            <textarea class="input-form input-cadastro largura" name="descricao" maxlength="200" required></textarea>
+
+            <input type="file" id="imagem" name="imagem" accept="image/*" required style="display: none;">
+          </div>
         
+        </div>
+        <div>
+        <label for="imagem" class="custom-file-upload">Selecionar Imagem</label>
+        </div>
+        <div >
+          
+            <button type="submit" class="btn botao-conta">Cadastrar Animal</button>
+        </div>
 
-    </li>
-{% else %}
-    <li>Você ainda não adotou nenhum animal</li>
-{% endfor %}
+    </form>
+
+
+  </div>
+</div>
+
+<script>
+  function mostrarTela(id) {
+    // Esconde todas as telas
+    const telas = document.querySelectorAll('.tela');
+    telas.forEach(tela => tela.style.display = 'none');
+
+    // Mostra apenas a tela selecionada
+    const telaSelecionada = document.getElementById(id);
+    if (telaSelecionada) {
+      telaSelecionada.style.display = 'block';
+    }
+  }
+</script>
+{% endblock %}

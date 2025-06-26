@@ -1,0 +1,8 @@
+# Versões utilizadas no projeto
+# Requires Python==3.12
+
+flask==3.1.0
+flask_login==0.6.3
+flask_sqlalchemy==3.1.1
+sqlalchemy==2.0.40
+pytz==2025.2
